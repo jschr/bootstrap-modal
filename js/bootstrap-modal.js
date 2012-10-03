@@ -32,9 +32,9 @@
 		
 		show: function () {
 			var that = this, 
-				e = $.Event('show.modal');
+				e = $.Event('show');
 			
-			this.$element.trigger(e);
+			this.$element.triggerHandler(e);
 
 			if (e.isDefaultPrevented()) return;
 			
@@ -65,9 +65,9 @@
 
 			var that = this;
 
-			e = $.Event('hide.modal');
+			e = $.Event('hide');
 
-			this.$element.trigger(e);
+			this.$element.triggerHandler(e);
 
 			if (!this.isShown || e.isDefaultPrevented()) return (this.isShown = false);
 
@@ -117,7 +117,7 @@
 		hideModal: function () {
 			this.$element
 				.hide()
-				.trigger('hidden.modal');
+				.triggerHandler('hidden');
 		}, 
 		
 		removeLoading: function(){
@@ -127,6 +127,8 @@
 		},
 		
 		loading: function(callback){
+			callback = callback || function(){};
+		
 			var animate = this.$element.hasClass('fade') ? 'fade' : '';
 			
 			if (!this.isLoading) {
@@ -135,9 +137,8 @@
 				var $parent = this.$element.find('.modal-body');
 				$parent = $parent.length ? $parent : this.$element;
 				
-				this.$loading = $('<div class="loading-mask ' + animate + '">' +
-						'<img class="loading-spinner" src="/webasp/images/oespinner.gif" />' +
-					'</div>')
+				this.$loading = $('<div class="loading-mask ' + animate + '">')
+					.append(this.options.spinner)
 					.appendTo($parent);
 
 				if (doAnimate) this.$loading[0].offsetWidth // force reflow	
@@ -166,8 +167,8 @@
 		toggleLoading: function(callback){ this.loading(callback); }, 
 		
 		destroy: function(){
-			var e = $.Event('destroy.modal');
-			this.$element.trigger(e);
+			var e = $.Event('destroy');
+			this.$element.triggerHandler(e);
 			if (e.isDefaultPrevented()) return;
 			
 			this.teardown();
@@ -216,7 +217,8 @@
 		loading: false,
 		show: true,
 		width: null,
-		manager: GlobalModalManager
+		manager: GlobalModalManager,
+		spinner: '<img class="loading-spinner" src="/webasp/images/oespinner.gif" />'
 	}
 
 	$.fn.modal.Constructor = Modal

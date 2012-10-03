@@ -39,7 +39,7 @@
 			this.$element = $(element);
 			this.options = $.extend({}, $.fn.modalmanager.defaults, this.$element.data(), typeof options == 'object' && options);
 			this.stack = [];
-			this.useAbsolute = this.$element[0] !== $('body')[0];
+			this.isBody = this.$element[0] === $('body')[0];
 		},
 		
 		createModal: function(element, options){
@@ -51,14 +51,17 @@
 			
 			var that = this;
 			
-			modal.$element.on('show.modal', function(e){
+			modal.$element.on('show.modalmanager', function(e){
 				modal.isShown = true;
 				$('body').toggleClass('modal-open', that.hasOpenModal());
 				
+				
+				var $scrollElement = that.isBody ? $(window) : that.$element;
+				
 				modal.$element
-					.toggleClass('modal-absolute', that.useAbsolute)
-					.css('margin-top', that.$element.scrollTop()) //TODO: handle container overflow scroll when it is not body 
-					.css('z-index', (that.useAbsolute ? baseModalAbszIndex : baseModalzIndex) 
+					.toggleClass('modal-absolute', !that.isBody)
+					.css('margin-top', $scrollElement.scrollTop()) //TODO: handle container overflow scroll when it is not body 
+					.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
 						+ (zIndexFactor * that.getIndexOfModal(modal)));
 					
 				that.backdrop(modal, function () {
@@ -82,17 +85,17 @@
 						.attr('aria-hidden', false);
 
 					transition ?
-						modal.$element.one($.support.transition.end, function () { modal.$element.trigger('shown.modal') }) :
-						modal.$element.trigger('shown.modal');
+						modal.$element.one($.support.transition.end, function () { modal.$element.triggerHandler('shown') }) :
+						modal.$element.triggerHandler('shown');
 				})
 				
-				modal.$element.on('shown.modal', function(e){
+				modal.$element.on('shown.modalmanager', function(e){
 					that.setFocus();
 				})
 				
 			});
 			
-			modal.$element.on('hidden.modal', function(e){
+			modal.$element.on('hidden.modalmanager', function(e){
 				that.backdrop(modal);
 
 				if (modal.$backdrop){
@@ -105,7 +108,7 @@
 				
 			});
 			
-			modal.$element.on('destroy.modal', function(e){
+			modal.$element.on('destroy.modalmanager', function(e){
 				that.removeModal(modal);
 			});
 		},
@@ -134,6 +137,7 @@
 		},
 
 		removeModal: function(modal){
+			modal.$element.off('.modalmanager');
 			if (modal.$backdrop) this.removeBackdrop.call(modal);
 			this.stack.splice(this.getIndexOfModal(modal), 1);
 		},
@@ -159,12 +163,13 @@
 			if (!this.isLoading) {
 				$backdrop =  $('<div class="modal-backdrop ' + animate + '" />')
 					.appendTo(this.$element)
-					.toggleClass('modal-absolute', this.useAbsolute);
+					.toggleClass('modal-absolute', !this.isBody);
 			} else {
 				$backdrop = this.$loading;
-				$backdrop.off('.modalmanager').html('');
-				this.$loading = null;
+				$backdrop.off('.modalmanager');
+				this.$spinner.remove();
 				this.isLoading = false;
+				this.$loading = this.$spinner = null;
 			}
 				
 			return $backdrop
@@ -181,7 +186,7 @@
 				modal.$backdrop = this.createBackdrop(animate);
 				
 				modal.$backdrop.css('z-index', 
-						(this.useAbsolute ? baseBackdropAbszIndex : baseBackdropzIndex) 
+						(!this.isBody ? baseBackdropAbszIndex : baseBackdropzIndex) 
 						+ (zIndexFactor * this.getIndexOfModal(modal)));
 			
 				
@@ -217,6 +222,8 @@
 		},
 		
 		loading: function(callback){
+			callback = callback || function(){ };
+			
 			if (!this.isLoading) {
 			
 				this.$loading = this.createBackdrop('fade');
@@ -225,13 +232,23 @@
 					
 				this.$loading
 					.css('z-index', 
-						(this.useAbsolute ? baseBackdropAbszIndex : baseBackdropzIndex) 
+						(!this.isBody ? baseBackdropAbszIndex : baseBackdropzIndex) 
 						+ (zIndexFactor * this.stack.length))
-					.append('<img class="loading-spinner" src="/webasp/images/oespinner.gif" />')
 					.on('click.modalmanager', $.proxy(this.loading, this))
 					.addClass('in');
-
+				
+				var $scrollElement = this.isBody ? $(window) : that.$element;
+				
+				this.$spinner = $('<div class="modal-spinner fade">')
+					.append(this.options.spinner)
+					.css('z-index', this.$loading.css('z-index'))
+					.css('margin-top', $scrollElement.scrollTop())
+					.appendTo(this.$element)
+					.addClass('in');
+				
 				this.isLoading = true;
+				
+				
 				
 				$.support.transition ?
 				this.$loading.one($.support.transition.end, callback) :
@@ -239,7 +256,9 @@
 
 			} else if (this.isLoading && this.$loading) {
 				this.$loading.removeClass('in');
-
+				
+				if (this.$spinner) this.$spinner.remove();
+				
 				var that = this;
 				$.support.transition ?
 					this.$loading.one($.support.transition.end, function(){ that.removeLoading() }) :
@@ -268,7 +287,8 @@
 	}
 
 	$.fn.modalmanager.defaults = {
-		backdrop: true
+		backdrop: true,
+		spinner: '<img src="/webasp/images/oespinner-trans.gif" />'
 	}
 
 	$.fn.modalmanager.Constructor = ModalManager
