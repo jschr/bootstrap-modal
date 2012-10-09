@@ -8,8 +8,6 @@
 	var Modal = function (element, options) {
 		this.init(element, options);
 	}
-	
-	window.Modal = Modal;
 
 	Modal.prototype = {
 
