@@ -1,3 +1,4 @@
+
 .modal {
 	outline: none;
 	position: absolute;
@@ -34,6 +35,12 @@
 	border-radius: 6px;
 }
 
+.modal-spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
 .modal-backdrop.modal-absolute{
 	position: absolute;
 	z-index: 940;
@@ -46,9 +53,34 @@
 	background: #fff;
 }
 
+.modal.container {
+  width: 940px;
+  margin-left: -470px;
+}
+
+
+@media (min-width: 1200px) {
+	.modal.container {
+		width: 1170px;
+		margin-left: -585px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+	.modal.container {
+		top: 2%;
+		right: 2%;
+		left: 2%;
+		width: auto !important;
+		height: auto !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		padding: 0;
+	}
+}
 
 @media (max-width: 767px) {
-	.modal {
+	.modal{
 		top: 2%;
 		right: 2%;
 		left: 2%;
@@ -57,18 +89,8 @@
 		margin-left: 0 !important;
 		margin-right: 0 !important;
 	}
+	
 	.modal.fade.in {
 		top: 2%;
-	}
-}
-
-@media (max-width: 480px) {
-	.modal {
-		top: 1%;
-		right: 1%;
-		left: 1%;
-	}
-	.modal.fade.in {
-		top: 1%;
 	}
 }
