@@ -215,7 +215,7 @@
 		show: true,
 		width: null,
 		manager: GlobalModalManager,
-		spinner: '<div class="progress progress-striped active" style="width: 250px; margin-left: -125px;"><div class="bar" style="width: 100%;"></div></div>'
+		spinner: '<div class="lloading-spinner progress progress-striped active" style="width: 250px; margin-left: -125px;"><div class="bar" style="width: 100%;"></div></div>'
 	}
 
 	$.fn.modal.Constructor = Modal
