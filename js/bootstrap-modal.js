@@ -134,12 +134,9 @@
 			if (!this.isLoading) {
 				var doAnimate = $.support.transition && animate;
 				
-				var $parent = this.$element.find('.modal-body');
-				$parent = $parent.length ? $parent : this.$element;
-				
 				this.$loading = $('<div class="loading-mask ' + animate + '">')
 					.append(this.options.spinner)
-					.appendTo($parent);
+					.appendTo(this.$element);
 
 				if (doAnimate) this.$loading[0].offsetWidth // force reflow	
 					
