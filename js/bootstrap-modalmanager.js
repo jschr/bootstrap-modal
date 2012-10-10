@@ -288,7 +288,7 @@
 
 	$.fn.modalmanager.defaults = {
 		backdrop: true,
-		spinner: '<div class="loading-spinner progress progress-striped active" style="width: 250px; margin-left: -125px;"><div class="bar" style="width: 100%;"></div></div>'
+		spinner: '<img class="loading-spinner" src="img/ajax-loader.gif" />'
 	}
 
 	$.fn.modalmanager.Constructor = ModalManager
