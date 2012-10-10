@@ -12,7 +12,7 @@
       .text-center { text-align: center; }
     </style>
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="css/bootstrap-modal.css" rel="stylesheet"></link>
+    <link href="http://jschr.github.com/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet"></link>
   </head>
       <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -50,20 +50,20 @@
               <button class="demo btn btn-primary btn-large" data-toggle="modal">View Demo</button>
             </div>
           </div>-->
-          <div class="full-width" style="position: relative; overflow: hidden">
-            <h3>Full Width</h3>
-            <pre class="pre-scrollable prettyprint linenums" data-source="#full-width">
-            </pre>
-            <div class="text-center">
-              <button class="demo btn btn-primary btn-large" data-toggle="modal" href="#full-width">View Demo</button>
-            </div>
-          </div>
           <div class="ajax" style="position: relative; overflow: hidden">
             <h3>AJAX (via jQuery.load)</h3>
             <pre class="pre-scrollable prettyprint linenums" data-source="#ajax">
             </pre>
             <div class="text-center">
               <button class="demo btn btn-primary btn-large" data-toggle="modal">View Demo</button>
+            </div>
+          </div>
+          <div class="full-width" style="position: relative; overflow: hidden">
+            <h3>Full Width</h3>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#full-width">
+            </pre>
+            <div class="text-center">
+              <button class="demo btn btn-primary btn-large" data-toggle="modal" href="#full-width">View Demo</button>
             </div>
           </div>
           <div class="custom-manager" style="position: relative; overflow: hidden">
@@ -123,28 +123,8 @@
     <h3>Modal header</h3>
   </div>
   <div class="modal-body">
-    <div class="row-fluid">
-      <div class="span6">
-        <h4>Some Input</h4>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-      </div>
-      <div class="span6">
-        <h4>Some More Input</h4>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-        <p><input type="text" class="span12" /></p>
-      </div>
-    </div>
+    <p>This modal will resize itself to the same dimensions as the container class.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sollicitudin ipsum ac ante fermentum suscipit. In ac augue non purus accumsan lobortis id sed nibh. Nunc egestas hendrerit ipsum, et porttitor augue volutpat non. Aliquam erat volutpat. Vestibulum scelerisque lobortis pulvinar. Aenean hendrerit risus neque, eget tincidunt leo. Vestibulum est tortor, commodo nec cursus nec, vestibulum vel nibh. Morbi elit magna, ornare placerat euismod semper, dignissim vel odio. Phasellus elementum quam eu ipsum euismod pretium.</p>
   </div>
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
@@ -215,11 +195,11 @@
 
 <div id="ajax-modal" class="modal hide fade" tabindex="-1"></div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
-    <script src="js/bootstrap-modalmanager.js"></script>
-    <script src="js/bootstrap-modal.js"></script>
+    <script src="http://jschr.github.com/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+    <script src="http://jschr.github.com/bootstrap-modal/js/bootstrap-modal.js"></script>
 <script type="text/javascript">
   $(function(){
     $('[data-source]').each(function(){
