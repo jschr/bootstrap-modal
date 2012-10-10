@@ -6,58 +6,266 @@
     <title>Bootstrap-modal by jschr</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+  <link href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet" />
+    <style>
+      body { padding-top: 40px; }
+      .text-center { text-align: center; }
+    </style>
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap-modal.css" rel="stylesheet"></link>
   </head>
-  <body>
-    <div class="navbar navbar-fixed-top">
+      <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <a class="brand" href="http://jschr.github.com/bootstrap-modal/">Documentation - Modal</a>
+        <div class="container">
+          <a class="brand" href="./index.html">Documentation - Modals</a>
+        </div>
       </div>
     </div>
-    <div class="container">
-      <h3>Responsive</h3>
-      <button class="btn btn-large btn-primary" data-toggle="modal" href="#responsive">View Demo</button>
-    </div>
-    
-    <div id="responsive" class="modal hide fade">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>Modal header</h3>
-      </div>
-      <div class="modal-body">
-        <div class="row-fluid">
-          <div class="span6">
-            <h4>Some Input</h4>
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
+    <div class="container" style="position: relative">
+      <div class="row-fluid">
+        <div class="span12">
+          <div class="responsive">
+            <h3>Responsive</h3>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#responsive">
+            </pre>
+            <div class="text-center">
+              <button class="demo btn btn-primary btn-large" data-toggle="modal" href="#responsive">View Demo</button>
+            </div>
           </div>
-          <div class="span6">
-            <h4>Some More Input...</h4>
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
-            <input type="text" class="span12" />
+          
+          <div class="stackable">
+            <h3>Stackable</h3>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#stack1, #stack2, #stack3">         
+            </pre>
+            <div class="text-center">
+              <button class="demo btn btn-primary btn-large" data-toggle="modal" href="#stack1">View Demo</button>
+            </div>
+          </div>
+          
+          <!--<div class="dynamic">
+            <h3>Dynamic</h3>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#dynamic">
+            </pre>
+            <div class="text-center">
+              <button class="demo btn btn-primary btn-large" data-toggle="modal">View Demo</button>
+            </div>
+          </div>-->
+          
+          <div class="ajax" style="position: relative; overflow: hidden">
+            <h3>AJAX (via jQuery.load)</h3>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#ajax">
+            </pre>
+            <div class="text-center">
+              <button class="demo btn btn-primary btn-large" data-toggle="modal">View Demo</button>
+            </div>
+          </div>
+          <div class="custom-manager" style="position: relative; overflow: hidden">
+            <h3>Custom Manager</h3>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#custom-manager">
+            </pre>
+            <div class="text-center">
+              <button class="demo btn btn-primary btn-large" data-toggle="modal">View Demo</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <a href="#" class="btn">Close</a>
-        <a href="#" class="btn btn-primary">Save changes</a>
+    </div>
+    <br />
+    <br />
+    
+<!-- Modal Definitions (tabbed over for <pre>) -->
+
+<div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row-fluid">
+      <div class="span6">
+        <h4>Some Input</h4>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+      </div>
+      <div class="span6">
+        <h4>Some More Input</h4>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
+        <p><input type="text" class="span12" /></p>
       </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+
+<div id="stack1" class="modal hide fade" tabindex="-1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+    <p>One fine body…</p>
+    <p>One fine body…</p>
+    <button class="btn" data-toggle="modal" href="#stack2">Launch modal</button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+    <button type="button" class="btn btn-primary">Ok</button>
+  </div>
+</div>
+
+<div id="stack2" class="modal hide fade" tabindex="-1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+    <p>One fine body…</p>
+    <button class="btn" data-toggle="modal" href="#stack3">Launch modal</button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+    <button type="button" class="btn btn-primary">Ok</button>
+  </div>
+</div>
+
+<div id="stack3" class="modal hide fade" tabindex="-1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+    <button type="button" class="btn btn-primary">Ok</button>
+  </div>
+</div>
+
+<div id="myModal" class="modal hide fade" tabindex="-1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>This modal is in a custom manager</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+    <button type="button" class="btn btn-primary">Ok</button>
+  </div>
+</div>
+
+<div id="ajax-modal" class="modal hide fade" tabindex="-1"></div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
     <script src="js/bootstrap-modalmanager.js"></script>
     <script src="js/bootstrap-modal.js"></script>
+<script type="text/javascript">
+  $(function(){
+    $('[data-source]').each(function(){
+      var $this = $(this),
+        $source = $($this.data('source'));
+
+      var text = [];
+      $source.each(function(){
+        var $s = $(this);
+        if ($s.attr('type') == 'text/javascript'){
+          text.push($s.html().replace(/(\n)*/, ''));
+        } else {
+          text.push($s.clone().wrap('<div>').parent().html());
+        }
+      });
+      
+      $this.text(text.join('\n\n').replace(/\t/g, '    '));
+    });
+    
+    prettyPrint();
+  });
+</script>
+    
+
+<script id="dynamic" type="text/javascript">
+$('.dynamic .demo').click(function(){
+  var tmpl = [
+    // tabindex is required for focus
+    '<div class="modal hide fade" tabindex="-1">',
+      '<div class="modal-header">',
+        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>',
+        '<h3>Modal header</h3>', 
+      '</div>',
+      '<div class="modal-body">',
+        '<p>Test</p>',
+      '</div>',
+      '<div class="modal-footer">',
+        '<a href="#" data-dismiss="modal" class="btn">Close</a>',
+        '<a href="#" class="btn btn-primary">Save changes</a>',
+      '</div>',
+    '</div>'
+  ].join('');
+  
+  $(tmpl).modal();
+});
+</script>
+
+<script id="custom-manager" type="text/javascript">
+// provide the container for all assigned modals to the manager
+var myManager = new ModalManager($('.custom-manager'));
+
+$('.custom-manager .demo').on('click', function(){
+  // helper function for modal creation
+  myManager.createModal($('#myModal')); 
+  
+  /* Alternatively:
+  $('#myModal').modal({ manager: myManager });
+  */
+});
+</script>
+
+<script id="ajax" type="text/javascript">
+// NOTE: modal must be in the DOM before calling .load()
+var $modal = $('#ajax-modal');
+
+$('.ajax .demo').on('click', function(){
+  // create the backdrop and wait for next modal to be triggered
+  GlobalModalManager.loading();
+
+  setTimeout(function(){
+     $modal.load('modal_ajax_test.html', '', function(){
+      $modal.modal();
+    });
+  }, 1000);
+});
+
+$modal.on('click', '.update', function(){
+  $modal.modal('loading');
+  setTimeout(function(){
+    $modal
+      .modal('loading')
+      .find('.modal-body')
+        .prepend('<div class="alert alert-info fade in">' +
+          'Updated!<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+        '</div>');
+  }, 1000);
+});
+
+</script> 
   </body>
 </html>
