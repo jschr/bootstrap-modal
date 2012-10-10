@@ -1,7 +1,7 @@
 Bootstrap Modal
 =============
 
-See live demo [here](http://jschr.github.com/bootstrap-modal/)
+See live demo [here](http://jschr.github.com/bootstrap-modal/).
 
 Extends Bootstrap's native modals to provide additional functionality. Introduces a **ModalManager** class that operates behind the scenes to handle multiple modals by listening on their events. 
 
@@ -34,7 +34,7 @@ Toggle the loading state.
 Provide a custom image or animation for the loading spinner
 
 + **manager**
-Set the modal's manager. By default this is set to the GlobalModalManager and will most likely not need to be overriden.
+Set the modal's manager. By default this is set to the GlobalModalManager and will most likely not need to be overridden.
 
 
 **ModalManager**
