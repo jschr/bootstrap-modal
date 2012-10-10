@@ -8,8 +8,6 @@
 	var Modal = function (element, options) {
 		this.init(element, options);
 	}
-	
-	window.Modal = Modal;
 
 	Modal.prototype = {
 
@@ -134,12 +132,9 @@
 			if (!this.isLoading) {
 				var doAnimate = $.support.transition && animate;
 				
-				var $parent = this.$element.find('.modal-body');
-				$parent = $parent.length ? $parent : this.$element;
-				
 				this.$loading = $('<div class="loading-mask ' + animate + '">')
 					.append(this.options.spinner)
-					.appendTo($parent);
+					.appendTo(this.$element);
 
 				if (doAnimate) this.$loading[0].offsetWidth // force reflow	
 					
@@ -218,7 +213,7 @@
 		show: true,
 		width: null,
 		manager: GlobalModalManager,
-		spinner: '<img class="loading-spinner" src="/webasp/images/oespinner.gif" />'
+		spinner: '<div class="loading-spinner progress progress-striped active" style="width: 250px; margin-left: -125px;"><div class="bar" style="width: 100%;"></div></div>'
 	}
 
 	$.fn.modal.Constructor = Modal
