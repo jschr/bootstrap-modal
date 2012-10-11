@@ -53,16 +53,7 @@
 			
 			modal.$element.on('show.modalmanager', function(e){
 				modal.isShown = true;
-				$('body').toggleClass('modal-open', that.hasOpenModal());
-				
-				
-				var $scrollElement = that.isBody ? $(window) : that.$element;
-				
-				modal.$element
-					.toggleClass('modal-absolute', !that.isBody)
-					.css('margin-top', $scrollElement.scrollTop()) //TODO: handle container overflow scroll when it is not body 
-					.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
-						+ (zIndexFactor * that.getIndexOfModal(modal)));
+				$('body').toggleClass('modal-open', that.hasOpenModal());		
 					
 				that.backdrop(modal, function () {
 					var transition = $.support.transition && modal.$element.hasClass('fade')
@@ -71,6 +62,15 @@
 					if (!modal.$parent.length || modal.$parent[0] !== that.$element[0]) {
 						modal.$element.appendTo(that.$element);
 					}
+
+					var $scrollElement = that.isBody ? $(window) : that.$element;
+					console.log(modal.$element.height() > $(window).height());
+					modal.$element
+						.toggleClass('modal-absolute', !that.isBody)
+						.css('margin-top', $scrollElement.scrollTop() - ($(window).height() > modal.$element.height() ? 
+								modal.$element.height()/2 : 0))
+						.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
+							+ (zIndexFactor * that.getIndexOfModal(modal)));
 
 					modal.$element.show();
 
@@ -82,6 +82,7 @@
 
 					modal.$element
 						.addClass('in')
+						.toggleClass('top0', $(window).height() < modal.$element.height())
 						.attr('aria-hidden', false);
 
 					transition ?

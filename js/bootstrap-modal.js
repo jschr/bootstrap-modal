@@ -52,6 +52,7 @@
 			if (this.options.height){
 				this.$element.css('height', this.options.height);
 			}
+
 			
 			this.escape();
 			
