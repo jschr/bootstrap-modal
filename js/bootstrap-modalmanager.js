@@ -64,7 +64,7 @@
 					}
 
 					var $scrollElement = that.isBody ? $(window) : that.$element;
-					console.log(modal.$element.height() > $(window).height());
+				
 					modal.$element
 						.toggleClass('modal-absolute', !that.isBody)
 						.css('margin-top', $scrollElement.scrollTop() - ($(window).height() > modal.$element.height() ? 
