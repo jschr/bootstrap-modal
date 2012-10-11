@@ -22,6 +22,10 @@
 
 .modal.fade {
 	top: -100%;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out, margin-top 0.3s ease-out;	
+	   -moz-transition: opacity 0.3s linear, top 0.3s ease-out, margin-top 0.3s ease-out;
+	     -o-transition: opacity 0.3s linear, top 0.3s ease-out, margin-top 0.3s ease-out;
+	        transition: opacity 0.3s linear, top 0.3s ease-out, margin-top 0.3s ease-out;
 }
 
 .modal.fade.in {
