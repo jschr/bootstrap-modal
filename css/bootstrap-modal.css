@@ -1,14 +1,29 @@
-.modal-open .page-container {
+.modal-overflow {
+	/* prevent page moving as modal transitions */
+	overflow-y: scroll;
+}
+
+.modal-overflow .navbar-fixed-top {
+	/* prevent page moving as modal transitions */
+	margin-right: 0px;
+}
+
+.page-container {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	overflow: hidden;
+	overflow: auto;
 
-	/* allow page-conatiner to inherit body's padding/margin*/
+	/* allow page-conatiner to inherit body's padding/margin*/ 
+	padding: inherit;
 	margin: inherit;
-	padding: inherit; 
+}
+
+.modal-overflow .page-container {
+	/* prevent double scroll bars */
+	overflow: hidden;
 }
 
 .modal {
@@ -35,7 +50,7 @@
 	top: 50%;
 }
 
-.modal.top0.fade.in {
+.modal.fade.in.top0 {
 	top: 2%;
 }
 
@@ -111,7 +126,7 @@
 		height: auto !important;
 		margin: 0 !important;
 	}
-	
+
 	.modal.fade.in {
 		top: 2%;
 	}
