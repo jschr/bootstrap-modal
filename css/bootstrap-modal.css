@@ -1,15 +1,14 @@
-.page-container {
+.modal-open .page-container {
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	overflow: auto;
-	
+	overflow: hidden;
+
 	/* allow page-conatiner to inherit body's padding/margin*/
 	margin: inherit;
 	padding: inherit; 
-
 }
 
 .modal {
