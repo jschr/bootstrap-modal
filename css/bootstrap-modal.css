@@ -1,9 +1,22 @@
+.page-container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+	
+	/* allow page-conatiner to inherit body's padding/margin*/
+	margin: inherit;
+	padding: inherit; 
+
+}
 
 .modal {
 	outline: none;
 	position: absolute;
 	margin-top: 0;
-	top: 4%;
+	top: 50%;
 	overflow: visible; /* allow content to popup out (i.e tooltips) */
 }
 
@@ -12,7 +25,12 @@
 }
 
 .modal.fade.in {
-	top: 4%;
+	top: 50%;
+}
+
+.modal.top0,
+.modal.top0.fade.in {
+	top: 2%;
 }
 
 .modal-body {
@@ -68,30 +86,28 @@
 
 @media (min-width: 768px) and (max-width: 979px) {
 	.modal.container {
-		top: 2%;
-		right: 2%;
-		left: 2%;
+		top: 2% !important;
+		right: 2% !important;
+		left: 2% !important;
 		width: auto !important;
 		height: auto !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
-		padding: 0;
+		margin: 0 !important;
+		padding: 0 !important;
 	}
 }
 
 @media (max-width: 767px) {
 	.modal{
-		top: 2%;
-		right: 2%;
-		left: 2%;
+		top: 2% !important;
+		right: 2% !important;
+		left: 2% !important;
 		width: auto !important;
 		height: auto !important;
-		margin-left: 0 !important;
-		margin-right: 0 !important;
+		margin: 0 !important;
 	}
 	
 	.modal.fade.in {
-		top: 2%;
+		top: 2% !important;
 	}
 }
 
