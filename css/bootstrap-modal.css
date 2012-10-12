@@ -1,29 +1,27 @@
-.modal-overflow {
-	/* prevent page moving as modal transitions */
+.modal-open.page-overflow {
+	overflow: hidden;
+}
+
+/* add a scroll bar to stop page from jerking around */
+.modal-open.page-overflow .page-container,
+.modal-open.page-overflow .page-container .navbar-fixed-top,
+.modal-open.page-overflow .modal-container  {
 	overflow-y: scroll;
 }
 
-.modal-overflow .navbar-fixed-top {
-	/* prevent page moving as modal transitions */
-	margin-right: 0px;
-}
-
-.page-container {
-	position: absolute;
+.modal-container {
+	display: none;
+	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	overflow: auto;
-
-	/* allow page-conatiner to inherit body's padding/margin*/ 
-	padding: inherit;
-	margin: inherit;
+	z-index: 9999;
 }
 
-.modal-overflow .page-container {
-	/* prevent double scroll bars */
-	overflow: hidden;
+.modal-open > .modal-container {
+	display: block;
 }
 
 .modal {

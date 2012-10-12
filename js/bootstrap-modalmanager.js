@@ -40,6 +40,9 @@
 			this.options = $.extend({}, $.fn.modalmanager.defaults, this.$element.data(), typeof options == 'object' && options);
 			this.stack = [];
 			this.isBody = this.$element[0] === $('body')[0];
+			
+			this.$container = this.$element.find('.modal-container');
+			this.$parent = this.$container.length ? this.$container : this.$element;
 		},
 
 		createModal: function(element, options){
@@ -51,23 +54,25 @@
 
 			var that = this;
 
-			
 			modal.$element.on('show.modalmanager', function(e){
 				modal.isShown = true;
 
 				that.$element
 					.toggleClass('modal-open', that.hasOpenModal())		
+					.toggleClass('page-overflow', $(window).height() < that.$element.height())
 					.toggleClass('modal-overflow', $(window).height() < modal.$element.height());
 				
 				that.backdrop(modal, function () {
 					var transition = $.support.transition && modal.$element.hasClass('fade')
 
+					
 					modal.$parent =  modal.$element.parent();
-					if (!modal.$parent.length || modal.$parent[0] !== that.$element[0]) {
-						modal.$element.appendTo(that.$element);
+					if (!modal.$parent.length || modal.$parent[0] !== that.$parent[0]) {
+						modal.$element.appendTo(that.$parent);
 					}
 
-					var $scrollElement = that.isBody ? $(window) : that.$element;
+					var $scrollElement = (that.$container.length ? that.$container : 
+						(that.isBody ? $(window) : that.$element));
 
 					modal.$element
 						.toggleClass('modal-absolute', !that.isBody)
@@ -123,7 +128,8 @@
 			var hasOpenModal = this.hasOpenModal();
 			this.$element.toggleClass('modal-open', hasOpenModal);
 			if (!hasOpenModal){
-				this.$element.removeClass('modal-overflow', hasOpenModal);
+				this.$element.removeClass('modal-overflow');
+				this.$element.removeClass('page-overflow');
 			}
 			this.setFocus();
 		},
@@ -171,7 +177,7 @@
 
 			if (!this.isLoading) {
 				$backdrop =  $('<div class="modal-backdrop ' + animate + '" />')
-					.appendTo(this.$element)
+					.appendTo(this.$parent)
 					.toggleClass('modal-absolute', !this.isBody);
 			} else {
 				$backdrop = this.$loading;
@@ -232,7 +238,9 @@
 
 		loading: function(callback){
 			callback = callback || function(){ };
-
+			
+			this.$element.toggleClass('modal-open', !this.isLoading || that.hasOpenModal());
+			
 			if (!this.isLoading) {
 
 				this.$loading = this.createBackdrop('fade');
@@ -246,18 +254,17 @@
 					.on('click.modalmanager', $.proxy(this.loading, this))
 					.addClass('in');
 
-				var $scrollElement = this.isBody ? $(window) : that.$element;
+				var $scrollElement = (this.$container.length ? this.$container : 
+						(this.isBody ? $(window) : this.$element));
 
 				this.$spinner = $('<div class="modal-spinner fade">')
 					.append(this.options.spinner)
 					.css('z-index', this.$loading.css('z-index'))
 					.css('margin-top', $scrollElement.scrollTop())
-					.appendTo(this.$element)
+					.appendTo(this.$parent)
 					.addClass('in');
 
 				this.isLoading = true;
-
-
 
 				$.support.transition ?
 				this.$loading.one($.support.transition.end, callback) :
@@ -276,6 +283,7 @@
 			} else if (callback) {
 				callback(this.isLoading);
 			}
+	
 		},
 
 		toggleLoading: function(callback){ this.loading(callback); }
