@@ -15,7 +15,9 @@ Overview
 + Backwards compatible
 + Responsive
 + Stackable
++ Full width
 + Load content via AJAX
++ Disable background scrolling
 
 Options
 -----------
