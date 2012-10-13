@@ -27,6 +27,9 @@ In addition to the standard bootstrap options, you now have access to the follow
 + **width**
 Set the inital width of the modal.
 
++ **height**
+Set the inital width of the modal.
+
 + **loading**
 Toggle the loading state.
 
@@ -36,7 +39,34 @@ Provide a custom image or animation for the loading spinner
 + **manager**
 Set the modal's manager. By default this is set to the GlobalModalManager and will most likely not need to be overridden.
 
-
 **ModalManager**
 + **spinner**
 Provide a custom image or animation for the loading spinner
+
+Disable Background Scrolling
+-----------
+
+If you want to prevent the background page from scrolling (see [demo](http://jschr.github.com/bootstrap-modal/) for example) there is one extra step required. You must wrap the page contents in a `<div class="page-container">` and provide a `<div class="modal-container">`. For example:
+
+	<body>
+		<div class="page-container">
+			<div class="navbar navbar-fixed-top">...</div>
+			<div class="container">...</div>
+		</div>
+		<div class="modal-container">
+			<!-- You can put your modal definitions here but it is not required -->
+		</div>
+	</body>
+
+The reason for doing this instead of just simply setting `overflow: hidden` when a modal is open is because I wanted to avoid having the page shift as a result of the scrollbar appearing/disappearing. I also require that the document be scrollable when there is a tall modal but only wanted it to scroll to fit the height of the modal, not the entire page.
+
+Known Issues
+-----------
+
+On mobile safari, the background page will still scroll if the modal is smaller then the window size. We get desired behaviour if the modal is larger then the window however. I have not been able to figure out a fix for this yet.
+
+
+	
+
+
+
