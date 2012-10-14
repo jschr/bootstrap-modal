@@ -30,7 +30,7 @@ In addition to the standard bootstrap options, you now have access to the follow
 Set the inital width of the modal.
 
 + **height**
-Set the inital width of the modal.
+Set the inital height of the modal.
 
 + **loading**
 Toggle the loading state.
