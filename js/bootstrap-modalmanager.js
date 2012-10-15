@@ -233,7 +233,9 @@
 		removeLoading: function(){
 			this.$loading.remove();
 			this.$loading = null;
-			this.isLoading = false;
+			
+			this.$spinner.remove();
+			this.$spinner = null;
 		},
 
 		loading: function(callback){
@@ -273,7 +275,7 @@
 			} else if (this.isLoading && this.$loading) {
 				this.$loading.removeClass('in');
 
-				if (this.$spinner) this.$spinner.remove();
+				this.isLoading = false;
 
 				var that = this;
 				$.support.transition ?
