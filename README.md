@@ -22,7 +22,7 @@ Overview
 Installation 
 -----------
 + Include `css/bootstrap-modal.css` after the main bootstrap css files.
-+ Include `js/bootstrap-modalmanager.js` and `js/bootstrap-modal.js` after the main bootstrap js files. Note that `bootstrap-modal` must be included **after** bootstrap-modalmanager.
++ Include `js/bootstrap-modalmanager.js` and `js/bootstrap-modal.js` after the main bootstrap js files. Note that `bootstrap-modal` must be included **after** `bootstrap-modalmanager`.
 
 	<link href="css/bootstrap.css" rel="stylesheet" />
 	<link href="css/bootstrap-responsive.css" rel="stylesheet" />
