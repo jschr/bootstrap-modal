@@ -27,7 +27,7 @@ Installation
 	<link href="css/bootstrap.css" rel="stylesheet" />
 	<link href="css/bootstrap-responsive.css" rel="stylesheet" />
  	<link href="css/bootstrap-modal.css" rel="stylesheet" />
- 
+
  	<script src="js/bootstrap.js"></script>
  	<script src="js/bootstrap-modalmanager.js"></script>
  	<script src="js/bootstrap-modal.js"></script>
