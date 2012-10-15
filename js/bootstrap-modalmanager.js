@@ -239,7 +239,7 @@
 		loading: function(callback){
 			callback = callback || function(){ };
 			
-			this.$element.toggleClass('modal-open', !this.isLoading || that.hasOpenModal());
+			this.$element.toggleClass('modal-open', !this.isLoading || this.hasOpenModal());
 			
 			if (!this.isLoading) {
 
