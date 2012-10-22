@@ -43,6 +43,8 @@
 			
 			this.$container = this.$element.find('.modal-container');
 			this.$parent = this.$container.length ? this.$container : this.$element;
+	
+			this.$element.toggleClass('has-modal-container', !!this.$container.length);
 		},
 
 		createModal: function(element, options){
@@ -59,27 +61,27 @@
 
 				that.$element
 					.toggleClass('modal-open', that.hasOpenModal())		
-					.toggleClass('page-overflow', $(window).height() < that.$element.height())
-					.toggleClass('modal-overflow', $(window).height() < modal.$element.height());
+					.toggleClass('page-overflow', $(window).height() < that.$element.height());
 				
+
+				var $scrollElement = (that.$container.length ? that.$container : 
+					(that.isBody ? $(window) : that.$element));
+				
+				modal.$element
+					.css('margin-top', $scrollElement.scrollTop() - ($(window).height() < modal.$element.height() ? 
+							0 : modal.$element.height()/2))
+					.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
+						+ (zIndexFactor * that.getIndexOfModal(modal)));
+					
 				that.backdrop(modal, function () {
 					var transition = $.support.transition && modal.$element.hasClass('fade')
 
 					
 					modal.$parent =  modal.$element.parent();
 					if (!modal.$parent.length || modal.$parent[0] !== that.$parent[0]) {
-						modal.$element.appendTo(that.$parent);
+						modal.$element.detach().appendTo(that.$parent);
 					}
 
-					var $scrollElement = (that.$container.length ? that.$container : 
-						(that.isBody ? $(window) : that.$element));
-
-					modal.$element
-						.toggleClass('modal-absolute', !that.isBody)
-						.css('margin-top', $scrollElement.scrollTop() - ($(window).height() > modal.$element.height() ? 
-								modal.$element.height()/2 : 0))
-						.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
-							+ (zIndexFactor * that.getIndexOfModal(modal)));
 
 					modal.$element.show();
 
@@ -92,7 +94,7 @@
 					modal.$element
 						.addClass('in')
 						.attr('aria-hidden', false)
-						.toggleClass('top0', $(window).height() < modal.$element.height());
+						.toggleClass('modal-absolute', !that.isBody);
 					
 					transition ?
 						modal.$element.one($.support.transition.end, function () { modal.$element.triggerHandler('shown') }) :
@@ -128,7 +130,6 @@
 			var hasOpenModal = this.hasOpenModal();
 			this.$element.toggleClass('modal-open', hasOpenModal);
 			if (!hasOpenModal){
-				this.$element.removeClass('modal-overflow');
 				this.$element.removeClass('page-overflow');
 			}
 			this.setFocus();
@@ -231,7 +232,7 @@
 		},
 
 		removeLoading: function(){
-			this.$loading.remove();
+			this.$loading && this.$loading.remove();
 			this.$loading = null;
 			
 			this.$spinner.remove();
@@ -313,6 +314,8 @@
 	$.fn.modalmanager.Constructor = ModalManager
 
 	// Create a default global modal manager 
-	window.GlobalModalManager = new ModalManager('body');
+	$(function(){
+		window.GlobalModalManager = new ModalManager('body');
+	})
 
 }(jQuery);
