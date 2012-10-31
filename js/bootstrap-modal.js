@@ -21,7 +21,8 @@
 				
 			this.options.remote && this.$element.find('.modal-body').load(this.options.remote);
 			
-			this.options.manager && this.options.manager.appendModal(this);
+			var manager = typeof this.options.manager === 'function' ? this.options.manager.call(this) : this.options.manager;
+			manager && manager.appendModal && manager.appendModal(this);
 		}, 
 		
 		toggle: function () {
@@ -48,12 +49,18 @@
 					}
 				});
 			}
+		
+			this.$element.toggleClass('modal-overflow', $(window).height() < this.$element.height());
+		
+			var prop = this.options.height ? 'height' : 'max-height';
+			var value = this.options.height || this.options.maxHeight;
 			
-			if (this.options.height){
-				this.$element.css('height', this.options.height);
+			if (value){
+				this.$element.find('.modal-body')
+					.css('overflow', 'auto')
+					.css(prop, value);
 			}
 
-			
 			this.escape();
 			
 			this.options.loading && this.loading();
@@ -80,6 +87,7 @@
 
 			this.$element
 				.removeClass('in')
+				.removeClass('modal-overflow')
 				.attr('aria-hidden', true);
 
 			$.support.transition && this.$element.hasClass('fade') ?
@@ -117,6 +125,17 @@
 			this.$element
 				.hide()
 				.triggerHandler('hidden');
+
+
+			var prop = this.options.height ? 'height' : 'max-height';
+			var value = this.options.height || this.options.maxHeight;
+			
+			if (value){
+				this.$element.find('.modal-body')
+					.css('overflow', '')
+					.css(prop, '');
+			}
+
 		}, 
 		
 		removeLoading: function(){
@@ -144,8 +163,8 @@
 				this.isLoading = true;
 				
 				doAnimate ?
-				this.$loading.one($.support.transition.end, callback) :
-				callback();
+					this.$loading.one($.support.transition.end, callback) :
+					callback();
 
 			} else if (this.isLoading && this.$loading) {
 				this.$loading.removeClass('in');
@@ -213,8 +232,10 @@
 		loading: false,
 		show: true,
 		width: null,
-		manager: GlobalModalManager,
-		spinner: '<div class="loading-spinner progress progress-striped active" style="width: 250px; margin-left: -125px;"><div class="bar" style="width: 100%;"></div></div>'
+		height: null,
+		maxHeight: null,
+		manager: function(){ return GlobalModalManager },
+		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}
 
 	$.fn.modal.Constructor = Modal
