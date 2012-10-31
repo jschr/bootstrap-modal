@@ -1,4 +1,11 @@
-/* MODALS */
+/*!
+ * Bootstrap Modal
+ *
+ * Copyright Jordan Schroter
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ */
 
 .modal-open.has-modal-container {
 	position: relative; /* safari */
@@ -12,6 +19,13 @@
 .modal-open.page-overflow .page-container .navbar-fixed-bottom,
 .modal-open.page-overflow .modal-container  {
 	overflow-y: scroll;
+}
+
+@media (max-width: 979px) {
+	.modal-open.page-overflow .page-container .navbar-fixed-top,
+	.modal-open.page-overflow .page-container .navbar-fixed-bottom  {
+		overflow-y: visible;
+	}
 }
 
 .modal-container {

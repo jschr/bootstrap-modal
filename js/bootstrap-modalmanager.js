@@ -1,26 +1,45 @@
+ /* ===========================================================
+ * bootstrap-modalmanager.js 
+ * ===========================================================
+ * Copyright 2012 Jordan Schroter.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ========================================================== */
+
 !function($){
 
 	"use strict"; // jshint ;_;
 
-	var $baseModal = $('<div class="modal" />').appendTo('body'),
-		$baseBackdrop = $('<div class="modal-backdrop" />').appendTo('body'),
-		$baseModalAbs = $('<div class="modal modal-absolute" />').appendTo('body'),
-		$baseBackdropAbs = $('<div class="modal-backdrop modal-absolute" />').appendTo('body');
+	var baseModalzIndex, baseModalAbszIndex, baseBackdropzIndex, baseBackdropAbszIndex,	zIndexFactor;
 
-	var baseModalzIndex = +$baseModal.css('z-index'),
+	$(function(){
+		var $baseModal = $('<div class="modal hide" />').appendTo('body'),
+			$baseBackdrop = $('<div class="modal-backdrop hide" />').appendTo('body'),
+			$baseModalAbs = $('<div class="modal modal-absolute hide" />').appendTo('body'),
+			$baseBackdropAbs = $('<div class="modal-backdrop modal-absolute hide" />').appendTo('body');
+
+		baseModalzIndex = +$baseModal.css('z-index'),
 		baseModalAbszIndex = +$baseModalAbs.css('z-index'),
 		baseBackdropzIndex = +$baseBackdrop.css('z-index'),
 		baseBackdropAbszIndex = +$baseBackdropAbs.css('z-index'),
 		zIndexFactor = baseModalzIndex - baseBackdropzIndex;
 
-	$baseModal.remove();
-	$baseBackdrop.remove();
-	$baseModalAbs.remove();
-	$baseBackdropAbs.remove();
-	$baseBackdrop = null;
-	$baseModal = null;
-	$baseModalAbs = null;
-	$baseBackdrop = null;
+		$baseModal.remove();
+		$baseBackdrop.remove();
+		$baseModalAbs.remove();
+		$baseBackdropAbs.remove();
+		$baseBackdrop = $baseModal = $baseModalAbs = $baseBackdrop = null;
+	});
 
 	/* MODAL MANAGER CLASS DEFINITION
 	* ====================== */
@@ -67,9 +86,11 @@
 				var $scrollElement = (that.$container.length ? that.$container : 
 					(that.isBody ? $(window) : that.$element));
 				
+				var modalOverflow = $(window).height() < modal.$element.height() || modal.options.modalOverflow;
+
 				modal.$element
-					.css('margin-top', $scrollElement.scrollTop() - ($(window).height() < modal.$element.height() ? 
-							0 : modal.$element.height()/2))
+					.toggleClass('modal-overflow', modalOverflow)
+					.css('margin-top', $scrollElement.scrollTop() - (modalOverflow ? 0 : modal.$element.height()/2))
 					.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
 						+ (zIndexFactor * that.getIndexOfModal(modal)));
 					
@@ -95,19 +116,22 @@
 						.addClass('in')
 						.attr('aria-hidden', false)
 						.toggleClass('modal-absolute', !that.isBody);
-					
+								
 					transition ?
 						modal.$element.one($.support.transition.end, function () { modal.$element.triggerHandler('shown') }) :
 						modal.$element.triggerHandler('shown');
-				})
-
-				modal.$element.on('shown.modalmanager', function(e){
-					that.setFocus();
-				})
-
+				});
 			});
 
+ 			modal.$element.on('shown.modalmanager', function(e){
+ 				if (e.isDefaultPrevented()) return;
+
+ 				that.setFocus();
+ 			});
+
 			modal.$element.on('hidden.modalmanager', function(e){
+				if (e.isDefaultPrevented()) return;
+
 				that.backdrop(modal);
 
 				if (modal.$backdrop){
@@ -121,6 +145,8 @@
 			});
 
 			modal.$element.on('destroy.modalmanager', function(e){
+				if (e.isDefaultPrevented()) return;
+				
 				that.removeModal(modal);
 			});
 		},
@@ -234,9 +260,7 @@
 		removeLoading: function(){
 			this.$loading && this.$loading.remove();
 			this.$loading = null;
-			
-			this.$spinner.remove();
-			this.$spinner = null;
+			this.isLoading = false;
 		},
 
 		loading: function(callback){
@@ -276,7 +300,7 @@
 			} else if (this.isLoading && this.$loading) {
 				this.$loading.removeClass('in');
 
-				this.isLoading = false;
+				if (this.$spinner) this.$spinner.remove();
 
 				var that = this;
 				$.support.transition ?
@@ -286,7 +310,6 @@
 			} else if (callback) {
 				callback(this.isLoading);
 			}
-	
 		},
 
 		toggleLoading: function(callback){ this.loading(callback); }
