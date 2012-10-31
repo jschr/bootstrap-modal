@@ -9,8 +9,6 @@ A single ModalManager is created by default that can be accessed through the `Gl
 
 Can be used as a replacement for Bootstrap's Modal class or as a patch to the library.
 
-**Note:** There are some issues with **BS 2.2.0** that I am currently in the process of resolving so please use **2.1.1** in the meantime.
-
 Overview
 -----------
 
