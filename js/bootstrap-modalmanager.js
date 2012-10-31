@@ -116,22 +116,19 @@
 						.addClass('in')
 						.attr('aria-hidden', false)
 						.toggleClass('modal-absolute', !that.isBody);
-								
-					transition ?
-						modal.$element.one($.support.transition.end, function () { modal.$element.triggerHandler('shown') }) :
+					
+					var complete = function(){
+						that.setFocus();
 						modal.$element.triggerHandler('shown');
+					}
+
+					transition ?
+						modal.$element.one($.support.transition.end, complete) :
+						complete();
 				});
 			});
 
- 			modal.$element.on('shown.modalmanager', function(e){
- 				if (e.isDefaultPrevented()) return;
-
- 				that.setFocus();
- 			});
-
 			modal.$element.on('hidden.modalmanager', function(e){
-				if (e.isDefaultPrevented()) return;
-
 				that.backdrop(modal);
 
 				if (modal.$backdrop){
@@ -145,8 +142,6 @@
 			});
 
 			modal.$element.on('destroy.modalmanager', function(e){
-				if (e.isDefaultPrevented()) return;
-				
 				that.removeModal(modal);
 			});
 		},
