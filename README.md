@@ -45,6 +45,9 @@ Set the inital width of the modal.
 + **height**
 Set the inital height of the modal.
 
++ **maxHeight**
+Set the max-height of the modal.
+
 + **loading**
 Toggle the loading state.
 

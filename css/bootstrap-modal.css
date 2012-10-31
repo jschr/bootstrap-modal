@@ -1,11 +1,15 @@
-.modal-open {
+/* MODALS */
+
+.modal-open.has-modal-container {
 	position: relative; /* safari */
 	overflow: hidden;
 }
 
+
 /* add a scroll bar to stop page from jerking around */
 .modal-open.page-overflow .page-container,
 .modal-open.page-overflow .page-container .navbar-fixed-top,
+.modal-open.page-overflow .page-container .navbar-fixed-bottom,
 .modal-open.page-overflow .modal-container  {
 	overflow-y: scroll;
 }
@@ -33,29 +37,21 @@
 	overflow: visible; /* allow content to popup out (i.e tooltips) */
 }
 
-.modal.top0 {
-	top: 2%;
-}
-
 .modal.fade {
 	top: -100%;
-	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out, margin-top 0.3s ease-out;	
-	   -moz-transition: opacity 0.3s linear, top 0.3s ease-out, margin-top 0.3s ease-out;
-	     -o-transition: opacity 0.3s linear, top 0.3s ease-out, margin-top 0.3s ease-out;
-	        transition: opacity 0.3s linear, top 0.3s ease-out, margin-top 0.3s ease-out;
+	-webkit-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;	
+	   -moz-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+	     -o-transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
+	        transition: opacity 0.3s linear, top 0.3s ease-out, bottom 0.3s ease-out, margin-top 0.3s ease-out;
 }
 
 .modal.fade.in {
 	top: 50%;
 }
 
-.modal.fade.in.top0 {
-	top: 2%;
-}
-
 .modal-body {
 	max-height: none;
-	/*position: relative; This will break tooltips inside modals*/
+	overflow: visible;
 }
 
 .modal.modal-absolute {
@@ -96,6 +92,47 @@
   margin-left: -470px;
 }
 
+/* Modal Overflow */
+
+.modal-overflow.modal {
+	top: 1%;
+	/*bottom: 1%;*/
+}
+
+.modal-overflow.modal.fade {
+	top: -100%;
+}
+
+.modal-overflow.modal.fade.in {
+	top: 1%;
+	/*bottom: 1%;*/
+}
+
+.modal-overflow .modal-body {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/*.modal-overflow .modal-body {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin-top: 48px; // header height
+	margin-bottom: 60px; // footer height
+	overflow: auto;
+}
+
+
+.modal-overflow .modal-footer {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}*/
+
+/* Responsive */
 
 @media (min-width: 1200px) {
 	.modal.container {
@@ -105,20 +142,41 @@
 }
 
 @media (max-width: 979px) {
-	.modal, .modal.container {
-		top: 2%;
-		right: 2%;
-		left: 2%;
+	.modal, 
+	.modal.container,
+	.modal.modal-overflow 	{
+		top: 1%;
+		right: 1%;
+		left: 1%;
+		bottom: auto;
 		width: auto !important;
 		height: auto !important;
 		margin: 0 !important;
 		padding: 0 !important;
 	}
 	
-	.modal.fade.in {
-		top: 2%;
+	.modal.fade.in, 
+	.modal.container.fade.in,
+	.modal.modal-overflow.fade.in {
+		top: 1%;
+		bottom: auto;
+	}
+	
+	.modal-body,
+	.modal-overflow .modal-body {
+		position: static;
+		margin: 0;
+		height: auto !important;
+		max-height: none !important;
+		overflow: visible !important;
+	}
+	
+	.modal-footer,
+	.modal-overflow .modal-footer {
+		position: static;
 	}
 }
+
 .loading-spinner {
 	position: absolute;
 	top: 50%;
