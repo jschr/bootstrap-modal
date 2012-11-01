@@ -54,6 +54,9 @@ Toggle the loading state.
 + **spinner**
 Provide a custom image or animation for the loading spinner
 
++ **modalOverflow **
+Set this property to true for modals with highly dynamic content. This will force the modal behave as if it is larger then the viewport.
+
 + **manager**
 Set the modal's manager. By default this is set to the GlobalModalManager and will most likely not need to be overridden.
 
@@ -78,10 +81,24 @@ If you want to prevent the background page from scrolling (see [demo](http://jsc
 
 The reason for doing this instead of just simply setting `overflow: hidden` when a modal is open is because I wanted to avoid having the page shift as a result of the scrollbar appearing/disappearing. I also require that the document be scrollable when there is a tall modal but only wanted it to scroll to fit the height of the modal, not the entire page.
 
+Constrain Modal to Window Size
+-----------
+	
+You can bind the the height of the modal body to the window with something like this:
+	
+    $.fn.modal.defaults.maxHeight = function(){
+        // subtract the height of the modal header and footer
+        return jQuery(window).height() - 165; 
+    }
+	
+**Note:** This will be overwritten by the responsiveness and is only set when the modal is displayed, not when the window is resized.
+	
 Known Issues
 -----------
 
-On mobile safari, the background page will still scroll if the modal is smaller then the window size. We get desired behaviour if the modal is larger then the window however. I have not been able to figure out a fix for this yet.
+On mobile safari, the background page will still scroll if the modal is smaller then the window size. We get desired behaviour if the modal is larger then the window however. 
+
+It seems like iOS6 has somewhat resolved this issue but is still not perfect.
 
 
 	
