@@ -88,7 +88,7 @@ You can bind the the height of the modal body to the window with something like 
 	
     $.fn.modal.defaults.maxHeight = function(){
         // subtract the height of the modal header and footer
-        return jQuery(window).height() - 165; 
+        return $(window).height() - 165; 
     }
 	
 **Note:** This will be overwritten by the responsiveness and is only set when the modal is displayed, not when the window is resized.
