@@ -75,7 +75,7 @@
 
 			var that = this;
 
-			modal.$element.on('show.modalmanager', function(e){
+			modal.$element.on('show.modalmanager', targetIsModal(function(e){
 				modal.isShown = true;
 
 				that.$element
@@ -126,9 +126,9 @@
 						modal.$element.one($.support.transition.end, complete) :
 						complete();
 				});
-			});
+			}));
 
-			modal.$element.on('hidden.modalmanager', function(e){
+			modal.$element.on('hidden.modalmanager', targetIsModal(function(e){
 				that.backdrop(modal);
 
 				if (modal.$backdrop){
@@ -139,11 +139,11 @@
 					that.destroyModal(modal);
 				}
 
-			});
+			}));
 
-			modal.$element.on('destroy.modalmanager', function(e){
+			modal.$element.on('destroy.modalmanager', targetIsModal(function(e){
 				that.removeModal(modal);
-			});
+			}));
 		},
 
 		destroyModal: function(modal){
@@ -308,6 +308,20 @@
 		},
 
 		toggleLoading: function(callback){ this.loading(callback); }
+	}
+
+	/* PRIVATE METHODS
+	* ======================= */
+
+	// make sure the event target is the modal itself in order to prevent 
+	// other components such as tabsfrom triggering the modal manager. 
+	// if Boostsrap namespaced events, this would not be needed.
+	function targetIsModal(callback){
+		return function(e){
+			if (this === e.target){
+				callback.apply(this, arguments);
+			}
+		}
 	}
 
 
