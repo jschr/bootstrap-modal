@@ -54,7 +54,7 @@ Toggle the loading state.
 + **spinner**
 Provide a custom image or animation for the loading spinner
 
-+ **modalOverflow **
++ **modalOverflow**
 Set this property to true for modals with highly dynamic content. This will force the modal behave as if it is larger then the viewport.
 
 + **manager**
