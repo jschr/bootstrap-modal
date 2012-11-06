@@ -253,7 +253,7 @@
       $this.text(text.join('\n\n').replace(/\t/g, '    '));
     });
     
-    $('.modal').on('shown', function(e){
+    $('.modal').on('focus', function(e){
       $(this).find('input:first').focus();
     }); 
 
