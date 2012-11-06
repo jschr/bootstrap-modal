@@ -117,7 +117,7 @@
     <div class="row-fluid">
       <div class="span6">
         <h4>Some Input</h4>
-        <p><input type="text" class="span12" /></p>
+        <p><input type="text" id="test" class="span12" /></p>
         <p><input type="text" class="span12" /></p>
         <p><input type="text" class="span12" /></p>
         <p><input type="text" class="span12" /></p>
@@ -167,6 +167,8 @@
     <p>One fine body…</p>
     <p>One fine body…</p>
     <p>One fine body…</p>
+    <input type="text" data-tabindex="1" />
+    <input type="text" data-tabindex="2" />
     <button class="btn" data-toggle="modal" href="#stack2">Launch modal</button>
   </div>
   <div class="modal-footer">
@@ -183,6 +185,8 @@
   <div class="modal-body">
     <p>One fine body…</p>
     <p>One fine body…</p>
+    <input type="text" data-tabindex="1" />
+    <input type="text" data-tabindex="2" />
     <button class="btn" data-toggle="modal" href="#stack3">Launch modal</button>
   </div>
   <div class="modal-footer">
@@ -198,6 +202,8 @@
   </div>
   <div class="modal-body">
     <p>One fine body…</p>
+    <input type="text" data-tabindex="1" />
+    <input type="text" data-tabindex="2" />
   </div>
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
@@ -247,6 +253,34 @@
       $this.text(text.join('\n\n').replace(/\t/g, '    '));
     });
     
+    $('.modal').on('shown', function(e){
+      $(this).find('input:first').focus();
+    }); 
+
+    $('.modal').on('keydown', '[data-tabindex]', function(e){
+      if (e.keyCode && e.keyCode == 9){
+        var $next = $rollover = $(this);
+        
+        $(e.delegateTarget).find('[data-tabindex]').each(function(e){
+          if (!e.shiftKey){
+            $next = $next.data('tabindex') < $(this).data('tabindex') ?
+              $next = $(this) :
+              $rollover = $(this);
+          } else {
+            $next = $next.data('tabindex') > $(this).data('tabindex') ?
+              $next = $(this) :
+              $rollover = $(this);
+          }
+
+        });
+
+        $next[0] !== $(this)[0] ?
+          $next.focus() : $rollover.focus();
+
+        e.preventDefault();
+      }
+    });
+
     prettyPrint();
   });
 </script>
