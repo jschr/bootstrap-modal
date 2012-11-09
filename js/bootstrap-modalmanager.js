@@ -1,5 +1,5 @@
  /* ===========================================================
- * bootstrap-modalmanager.js v1.0
+ * bootstrap-modalmanager.js v2.0
  * ===========================================================
  * Copyright 2012 Jordan Schroter.
  *
