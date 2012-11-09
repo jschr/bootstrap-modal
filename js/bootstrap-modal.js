@@ -80,6 +80,8 @@
 			}
 
 			this.escape();
+
+			this.tab();
 			
 			this.options.loading && this.loading();
 		}, 
@@ -98,6 +100,8 @@
 			this.isShown = false;
 
 			this.escape();
+
+			this.tab();
 			
 			this.isLoading && this.loading();
 
@@ -112,14 +116,49 @@
 				this.hideWithTransition() :
 				this.hideModal();
 		}, 
+
+		tab: function () {
+			var that = this;
+			if (this.isShown && this.options.keyboard) {
+				if (!this.$element.attr('tabindex')) this.$element.attr('tabindex', -1);
+				
+				this.$element.on('keydown.tabindex.modal', '[data-tabindex]', function(e){
+			    	if (e.keyCode && e.keyCode == 9){
+				        var $next = $(this), 
+				        	$rollover = $(this);
+				        
+				       that.$element.find('[data-tabindex]').each(function(e){
+			         		if (!e.shiftKey){
+			           	 		$next = $next.data('tabindex') < $(this).data('tabindex') ?
+				              		$next = $(this) :
+				              		$rollover = $(this);
+				          	} else {
+				            	$next = $next.data('tabindex') > $(this).data('tabindex') ?
+				              		$next = $(this) :
+				             		$rollover = $(this);
+				          	}
+				        });
+
+				    	console.log($next, $rollover, $next[0] !== $(this)[0]);
+
+				        $next[0] !== $(this)[0] ?
+			          		$next.focus() : $rollover.focus();
+
+				        e.preventDefault();
+			      	}
+			    });
+			} else if (!this.isShown) {
+				this.$element.off('keydown.tabindex.modal')
+			}
+		}, 
 		
 		escape: function () {
 			var that = this;
 			if (this.isShown && this.options.keyboard) {
 				if (!this.$element.attr('tabindex')) this.$element.attr('tabindex', -1);
 				
-				this.$element.on('keyup.dismiss.modal', function ( e ) {
-					e.which == 27 && that.hide()
+				this.$element.on('keyup.dismiss.modal', function (e) {
+					e.which == 27 && that.hide();
 				});
 			} else if (!this.isShown) {
 				this.$element.off('keyup.dismiss.modal')
@@ -253,6 +292,7 @@
 		height: null,
 		maxHeight: null,
 		modalOverflow: false,
+		focusOn: null,
 		manager: function(){ return GlobalModalManager },
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}

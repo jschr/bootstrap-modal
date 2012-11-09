@@ -164,13 +164,18 @@
 		},
 
 		setFocus: function () {
-			var topModal;
+			var topModal, $focusElem;
 
 			for (var i = 0; i < this.stack.length; i++){
 				if (this.stack[i].isShown) topModal = this.stack[i];
 			}
 
-			topModal && topModal.$element.focus();
+			if (topModal){
+				$focusElem = $(topModal.options.focusOn);
+				$focusElem = $focusElem.length ? $focusElem : topModal.$element;
+
+				$focusElem.focus();
+			}
 		},
 
 		removeModal: function(modal){
