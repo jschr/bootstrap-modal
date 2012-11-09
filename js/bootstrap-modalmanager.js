@@ -78,6 +78,8 @@
 			modal.$element.on('show.modalmanager', targetIsModal(function(e){
 				modal.isShown = true;
 
+
+
 				that.$element
 					.toggleClass('modal-open', that.hasOpenModal())		
 					.toggleClass('page-overflow', $(window).height() < that.$element.height());
@@ -86,23 +88,22 @@
 				var $scrollElement = (that.$container.length ? that.$container : 
 					(that.isBody ? $(window) : that.$element));
 				
+				var transition = $.support.transition && modal.$element.hasClass('fade');
+			
+				modal.$parent = modal.$element.parent();
+				
+				modal.$container = $('<div class="modal-scrollable">')
+					.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
+						+ (zIndexFactor * that.getIndexOfModal(modal)))
+					.appendTo(that.$element);
+
+				modal.$element.appendTo(modal.$container);
+
 				var modalOverflow = $(window).height() < modal.$element.height() || modal.options.modalOverflow;
 
 				modal.$element
-					.toggleClass('modal-overflow', modalOverflow)
-					.css('margin-top', $scrollElement.scrollTop() - (modalOverflow ? 0 : modal.$element.height()/2))
-					.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
-						+ (zIndexFactor * that.getIndexOfModal(modal)));
 					
 				that.backdrop(modal, function () {
-					var transition = $.support.transition && modal.$element.hasClass('fade')
-
-					
-					modal.$parent =  modal.$element.parent();
-					if (!modal.$parent.length || modal.$parent[0] !== that.$parent[0]) {
-						modal.$element.detach().appendTo(that.$parent);
-					}
-
 
 					modal.$element.show();
 
@@ -113,6 +114,8 @@
 					}
 
 					modal.$element
+						.toggleClass('modal-overflow', modalOverflow)
+						.css('margin-top', $scrollElement.scrollTop() - (modalOverflow ? 0 : modal.$element.height()/2))
 						.addClass('in')
 						.attr('aria-hidden', false)
 						.toggleClass('modal-absolute', !that.isBody);

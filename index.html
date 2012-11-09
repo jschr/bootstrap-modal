@@ -24,6 +24,7 @@
 	</style>
     <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
     <link href="css/bootstrap-modal.css" rel="stylesheet"></link>
+    <link href="css/animate.css" rel="stylesheet"></link>
 	<style>      
 	  .text-center { 
 	    text-align: center; 
@@ -104,8 +105,6 @@
 		  <br />
 		  <br />
 		</div>
-
-		<div class="modal-container"></div>
 		
 <!-- Modal Definitions (tabbed over for <pre>) -->
 <div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
@@ -232,8 +231,8 @@
     <script src="js/bootstrap-modalmanager.js"></script>
     <script src="js/bootstrap-modal.js"></script>
 <script type="text/javascript">
-  //$.fn.modal.defaults.spinner = '<img class="loading-spinner" src="img/ajax-loader.gif" />';
-  //$.fn.modalmanager.defaults.spinner = '<img class="loading-spinner" src="img/ajax-loader.gif" />';
+
+  $.fn.modal.defaults.focusOn = 'input:first';
 
   $(function(){
     $('[data-source]').each(function(){
