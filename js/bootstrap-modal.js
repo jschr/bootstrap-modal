@@ -109,6 +109,8 @@
 
 			this.$element
 				.removeClass('in')
+				.removeClass('animated')
+				.removeClass(that.options.attentionAnimation)
 				.removeClass('modal-overflow')
 				.attr('aria-hidden', true);
 
@@ -138,8 +140,6 @@
 				             		$rollover = $(this);
 				          	}
 				        });
-
-				    	console.log($next, $rollover, $next[0] !== $(this)[0]);
 
 				        $next[0] !== $(this)[0] ?
 			          		$next.focus() : $rollover.focus();
@@ -194,7 +194,7 @@
 			}
 
 		}, 
-		
+
 		removeLoading: function(){
 			this.$loading.remove();
 			this.$loading = null;
@@ -236,8 +236,34 @@
 			}
 		},
 		
-		toggleLoading: function(callback){ this.loading(callback); }, 
+		focus: function(){
+			var $focusElem = this.$element.find(this.options.focusOn);
+
+			$focusElem = $focusElem.length ? $focusElem : this.$element;
+
+			$focusElem.focus();
+		},
+
+		attention: function(){
+			// NOTE: transitionEnd with keyframes causes odd behaviour
+
+			this.$element
+				.removeClass('animated')
+				.removeClass(this.options.attentionAnimation);
+
+			var that = this;
+
+			setTimeout(function(){
+				that.$element
+					.addClass('animated')
+					.addClass(that.options.attentionAnimation);
+			}, 0);
+
+
+			this.focus();
+		},
 		
+
 		destroy: function(){
 			var e = $.Event('destroy');
 			this.$element.triggerHandler(e);
@@ -246,19 +272,14 @@
 			this.teardown();
 		},
 		
-		teardown: function(){
-			var $parent = this.$parent;
-			
-			if (!$parent.length){
+		teardown: function(){	
+			if (!this.$parent.length){
 				this.$element.remove();
 				this.$element = null;
-				return;
-			}
-			
-			if ($parent !== this.$element.parent()){
+			} else {
 				this.$element.appendTo(this.$parent);
 			}
-			
+
 			this.$element.off('.modal');
 			this.$element.removeData('modal');
 			this.$element
@@ -293,6 +314,7 @@
 		maxHeight: null,
 		modalOverflow: false,
 		focusOn: null,
+		attentionAnimation: 'shake',
 		manager: function(){ return GlobalModalManager },
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}

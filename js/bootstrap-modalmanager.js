@@ -20,27 +20,6 @@
 
 	"use strict"; // jshint ;_;
 
-	var baseModalzIndex, baseModalAbszIndex, baseBackdropzIndex, baseBackdropAbszIndex,	zIndexFactor;
-
-	$(function(){
-		var $baseModal = $('<div class="modal hide" />').appendTo('body'),
-			$baseBackdrop = $('<div class="modal-backdrop hide" />').appendTo('body'),
-			$baseModalAbs = $('<div class="modal modal-absolute hide" />').appendTo('body'),
-			$baseBackdropAbs = $('<div class="modal-backdrop modal-absolute hide" />').appendTo('body');
-
-		baseModalzIndex = +$baseModal.css('z-index'),
-		baseModalAbszIndex = +$baseModalAbs.css('z-index'),
-		baseBackdropzIndex = +$baseBackdrop.css('z-index'),
-		baseBackdropAbszIndex = +$baseBackdropAbs.css('z-index'),
-		zIndexFactor = baseModalzIndex - baseBackdropzIndex;
-
-		$baseModal.remove();
-		$baseBackdrop.remove();
-		$baseModalAbs.remove();
-		$baseBackdropAbs.remove();
-		$baseBackdrop = $baseModal = $baseModalAbs = $baseBackdrop = null;
-	});
-
 	/* MODAL MANAGER CLASS DEFINITION
 	* ====================== */
 
@@ -58,12 +37,7 @@
 			this.$element = $(element);
 			this.options = $.extend({}, $.fn.modalmanager.defaults, this.$element.data(), typeof options == 'object' && options);
 			this.stack = [];
-			this.isBody = this.$element[0] === $('body')[0];
-			
-			this.$container = this.$element.find('.modal-container');
-			this.$parent = this.$container.length ? this.$container : this.$element;
-	
-			this.$element.toggleClass('has-modal-container', !!this.$container.length);
+			this.backdropCount = 0;
 		},
 
 		createModal: function(element, options){
@@ -78,30 +52,19 @@
 			modal.$element.on('show.modalmanager', targetIsModal(function(e){
 				modal.isShown = true;
 
-
-
+				var transition = $.support.transition && modal.$element.hasClass('fade');
+				
 				that.$element
 					.toggleClass('modal-open', that.hasOpenModal())		
 					.toggleClass('page-overflow', $(window).height() < that.$element.height());
-				
-
-				var $scrollElement = (that.$container.length ? that.$container : 
-					(that.isBody ? $(window) : that.$element));
-				
-				var transition = $.support.transition && modal.$element.hasClass('fade');
 			
 				modal.$parent = modal.$element.parent();
 				
-				modal.$container = $('<div class="modal-scrollable">')
-					.css('z-index', (!that.isBody ? baseModalAbszIndex : baseModalzIndex) 
-						+ (zIndexFactor * that.getIndexOfModal(modal)))
-					.appendTo(that.$element);
+				modal.$container = that.createContainer(modal);
 
 				modal.$element.appendTo(modal.$container);
 
 				var modalOverflow = $(window).height() < modal.$element.height() || modal.options.modalOverflow;
-
-				modal.$element
 					
 				that.backdrop(modal, function () {
 
@@ -115,10 +78,9 @@
 
 					modal.$element
 						.toggleClass('modal-overflow', modalOverflow)
-						.css('margin-top', $scrollElement.scrollTop() - (modalOverflow ? 0 : modal.$element.height()/2))
+						.css('margin-top', modalOverflow ? 0 : 0 - modal.$element.height()/2)
 						.addClass('in')
-						.attr('aria-hidden', false)
-						.toggleClass('modal-absolute', !that.isBody);
+						.attr('aria-hidden', false);
 					
 					var complete = function(){
 						that.setFocus();
@@ -132,6 +94,7 @@
 			}));
 
 			modal.$element.on('hidden.modalmanager', targetIsModal(function(e){
+
 				that.backdrop(modal);
 
 				if (modal.$backdrop){
@@ -150,12 +113,18 @@
 		},
 
 		destroyModal: function(modal){
+			this.removeContainer(modal);
+
 			modal.destroy();
+
 			var hasOpenModal = this.hasOpenModal();
+
 			this.$element.toggleClass('modal-open', hasOpenModal);
+			
 			if (!hasOpenModal){
 				this.$element.removeClass('page-overflow');
 			}
+
 			this.setFocus();
 		},
 
@@ -163,22 +132,21 @@
 			for (var i = 0; i < this.stack.length; i++){
 				if (this.stack[i].isShown) return true;
 			}
+
 			return false;
 		},
 
 		setFocus: function () {
-			var topModal, $focusElem;
+			var topModal;
 
 			for (var i = 0; i < this.stack.length; i++){
 				if (this.stack[i].isShown) topModal = this.stack[i];
 			}
 
-			if (topModal){
-				$focusElem = $(topModal.options.focusOn);
-				$focusElem = $focusElem.length ? $focusElem : topModal.$element;
+			if (!topModal) return;
 
-				$focusElem.focus();
-			}
+			topModal.focus();
+
 		},
 
 		removeModal: function(modal){
@@ -206,9 +174,9 @@
 			var $backdrop;
 
 			if (!this.isLoading) {
-				$backdrop =  $('<div class="modal-backdrop ' + animate + '" />')
-					.appendTo(this.$parent)
-					.toggleClass('modal-absolute', !this.isBody);
+				$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+					.appendTo(this.$element);
+
 			} else {
 				$backdrop = this.$loading;
 				$backdrop.off('.modalmanager');
@@ -220,9 +188,39 @@
 			return $backdrop
 		},
 
+		removeContainer: function (modal) {
+			modal.$container.remove();
+			modal.$container = null;
+		}, 
+
+		createContainer: function(modal){
+			var $container;
+
+			$container = $('<div class="modal-scrollable">')
+				.css('z-index', getzIndex( 'modal', 
+					modal ? this.getIndexOfModal(modal) : this.stack.length ))
+				.appendTo(this.$element);
+
+			if (modal && modal.options.backdrop != 'static') {
+				$container.on('click.modal', function(e){
+					if (e.target !== $container[0]) return;
+					modal.hide();
+				});
+			} else if (modal) {
+				$container.on('click.modal', function(e){
+					if (e.target !== $container[0]) return;		
+					modal.attention();
+				});
+			}
+
+			return $container;
+
+		},
+
 		backdrop: function (modal, callback) {
 			var animate = modal.$element.hasClass('fade') ? 'fade' : '',
-				showBackdrop = $.extend({}, this.options, modal.options).backdrop;
+				showBackdrop = $.extend({}, this.options, modal.options).backdrop
+					&& this.backdropCount < this.options.backdropLimit;
 
 			if (modal.isShown && showBackdrop) {
 				var doAnimate = $.support.transition && animate && !this.isLoading;
@@ -230,27 +228,25 @@
 
 				modal.$backdrop = this.createBackdrop(animate);
 
-				modal.$backdrop.css('z-index', 
-						(!this.isBody ? baseBackdropAbszIndex : baseBackdropzIndex) 
-						+ (zIndexFactor * this.getIndexOfModal(modal)));
-
-
-				if (modal.options.backdrop != 'static') {
-					modal.$backdrop.on('click.modal', $.proxy(modal.hide, modal));
-				}
+				modal.$backdrop.css('z-index', getzIndex( 'backdrop', this.getIndexOfModal(modal) ))
 
 				if (doAnimate) modal.$backdrop[0].offsetWidth // force reflow
 
 				modal.$backdrop.addClass('in')
 
+				this.backdropCount += 1;
+
 				doAnimate ?
-				modal.$backdrop.one($.support.transition.end, callback) :
-				callback();
+					modal.$backdrop.one($.support.transition.end, callback) :
+					callback();
 
 			} else if (!modal.isShown && modal.$backdrop) {
 				modal.$backdrop.removeClass('in');
 
+				this.backdropCount -= 1;
+
 				var that = this;
+
 				$.support.transition && modal.$element.hasClass('fade')?
 					modal.$backdrop.one($.support.transition.end, function(){ that.removeBackdrop(modal) }) :
 					that.removeBackdrop(modal);
@@ -269,7 +265,9 @@
 		loading: function(callback){
 			callback = callback || function(){ };
 			
-			this.$element.toggleClass('modal-open', !this.isLoading || this.hasOpenModal());
+			this.$element
+				.toggleClass('modal-open', !this.isLoading || this.hasOpenModal())
+				.toggleClass('page-overflow', $(window).height() < this.$element.height());
 			
 			if (!this.isLoading) {
 
@@ -278,21 +276,16 @@
 				this.$loading[0].offsetWidth // force reflow	
 
 				this.$loading
-					.css('z-index', 
-						(!this.isBody ? baseBackdropAbszIndex : baseBackdropzIndex) 
-						+ (zIndexFactor * this.stack.length))
-					.on('click.modalmanager', $.proxy(this.loading, this))
+					.css('z-index', getzIndex('backdrop', this.stack.length))
 					.addClass('in');
 
-				var $scrollElement = (this.$container.length ? this.$container : 
-						(this.isBody ? $(window) : this.$element));
-
-				this.$spinner = $('<div class="modal-spinner fade">')
-					.append(this.options.spinner)
-					.css('z-index', this.$loading.css('z-index'))
-					.css('margin-top', $scrollElement.scrollTop())
-					.appendTo(this.$parent)
+				var $spinner = $(this.options.spinner)
+					.css('z-index', getzIndex('modal', this.stack.length))
+					.appendTo(this.$element)
 					.addClass('in');
+
+				this.$spinner = $(this.createContainer())
+					.append($spinner);
 
 				this.isLoading = true;
 
@@ -321,6 +314,31 @@
 	/* PRIVATE METHODS
 	* ======================= */
 
+	// computes and caches the zindexes
+	var getzIndex = (function(){
+		var zIndexFactor, 
+			baseIndex = {};
+
+		return function(type, pos){
+
+			if (typeof zIndexFactor === 'undefined'){
+				var $baseModal = $('<div class="modal hide" />').appendTo('body'),
+					$baseBackdrop = $('<div class="modal-backdrop hide" />').appendTo('body');
+
+				baseIndex['modal'] = +$baseModal.css('z-index'),
+				baseIndex['backdrop'] = +$baseBackdrop.css('z-index'),
+				zIndexFactor = baseIndex['modal'] - baseIndex['backdrop'];
+				
+				$baseModal.remove();
+				$baseBackdrop.remove();
+				$baseBackdrop = $baseModal = null;
+			}
+
+			return baseIndex[type] + (zIndexFactor * pos);
+
+		}
+	}())
+
 	// make sure the event target is the modal itself in order to prevent 
 	// other components such as tabsfrom triggering the modal manager. 
 	// if Boostsrap namespaced events, this would not be needed.
@@ -348,7 +366,8 @@
 
 	$.fn.modalmanager.defaults = {
 		backdrop: true,
-		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
+		backdropLimit: 999,
+		spinner: '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}
 
 	$.fn.modalmanager.Constructor = ModalManager

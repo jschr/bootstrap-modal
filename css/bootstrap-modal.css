@@ -7,7 +7,7 @@
  *
  */
 
-.modal-open.has-modal-container {
+.modal-open {
 	position: relative; /* safari */
 	overflow: hidden;
 }
@@ -17,7 +17,7 @@
 .modal-open.page-overflow .page-container,
 .modal-open.page-overflow .page-container .navbar-fixed-top,
 .modal-open.page-overflow .page-container .navbar-fixed-bottom,
-.modal-open.page-overflow .modal-container  {
+.modal-open.page-overflow .modal-scrollable {
 	overflow-y: scroll;
 }
 
@@ -28,20 +28,6 @@
 	}
 }
 
-.modal-container {
-	display: none;
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	overflow: auto;
-	z-index: 9999;
-}
-
-.modal-open > .modal-container {
-	display: block;
-}
 
 .modal-scrollable {
 	position: fixed;
@@ -90,12 +76,6 @@
 	right: 0;
 	background: #fff;
 	border-radius: 6px;
-}
-
-.modal-spinner {
-	position: absolute;
-	top: 50%;
-	left: 50%;
 }
 
 .modal-backdrop.modal-absolute{
