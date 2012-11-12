@@ -46,7 +46,8 @@
       <br />
 		  <div class="row">
 			  <div class="span10">
-  				<div class="responsive">
+  				
+          <div class="responsive">
   				  <h3>Responsive</h3>
   				  <pre class="pre-scrollable prettyprint linenums" data-source="#responsive">
   				  </pre>
@@ -54,7 +55,8 @@
   					<button class="demo btn btn-primary btn-large" data-toggle="modal" href="#responsive">View Demo</button>
   				  </div>
   				</div>
-  				
+  				<br />
+
   				<div class="stackable">
   				  <h3>Stackable</h3>
   				  <pre class="pre-scrollable prettyprint linenums" data-source="#stack1, #stack2, #stack3">         
@@ -63,15 +65,18 @@
   					<button class="demo btn btn-primary btn-large" data-toggle="modal" href="#stack1">View Demo</button>
   				  </div>
   				</div>
-				
-  				<!--<div class="dynamic">
+				  <br />
+  				
+          <!--<div class="dynamic">
   				  <h3>Dynamic</h3>
   				  <pre class="pre-scrollable prettyprint linenums" data-source="#dynamic">
   				  </pre>
   				  <div class="text-center">
   					<button class="demo btn btn-primary btn-large" data-toggle="modal">View Demo</button>
   				  </div>
-  				</div>-->
+  				</div>
+          <br />-->
+          
   				<div class="ajax" style="position: relative; overflow: hidden">
   				  <h3>AJAX (via jQuery.load)</h3>
   				  <pre class="pre-scrollable prettyprint linenums" data-source="#ajax">
@@ -80,6 +85,19 @@
   					<button class="demo btn btn-primary btn-large" data-toggle="modal">View Demo</button>
   				  </div>
   				</div>
+          <br />
+
+          <div class="static" style="position: relative; overflow: hidden">
+            <h3>Static Background with Animation</h3>
+            <p>Animation is via <a href="http://daneden.me/animate/">animate.css</a> so you will need to include the css file in your project.</p>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#static">
+            </pre>
+            <div class="text-center">
+            <button class="demo btn btn-primary btn-large" data-toggle="modal" href="#static">View Demo</button>
+            </div>
+          </div>
+          <br />
+
   				<div class="full-width" style="position: relative; overflow: hidden">
   				  <h3>Full Width</h3>
   				  <pre class="pre-scrollable prettyprint linenums" data-source="#full-width">
@@ -88,6 +106,8 @@
   					<button class="demo btn btn-primary btn-large" data-toggle="modal" href="#full-width">View Demo</button>
   				  </div>
   				</div>
+          <br />
+
 		    </div>
 	    </div>
 	  </div>
@@ -207,6 +227,16 @@
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
     <button type="button" class="btn btn-primary">Ok</button>
+  </div>
+</div>
+
+<div id="static" class="modal hide fade" tabindex="-1" data-backdrop="static">
+  <div class="modal-body">
+    <p>Would you like to continue with some arbitrary task?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">No</button>
+    <button type="button" data-dismiss="modal" class="btn btn-primary">Yes Please</button>
   </div>
 </div>
 

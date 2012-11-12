@@ -54,6 +54,9 @@ Toggle the loading state.
 + **spinner**
 Provide a custom image or animation for the loading spinner.
 
++ **consumeTab**
+Used to enable tabindexing for modals with `data-tabindex`. This is set to true by default.
+
 + **focusOn**
 The element or selector to set the focus too once the modal is shown.
 
@@ -108,7 +111,7 @@ You can use `data-tabindex` instead of the default `tabindex` to specify the tab
 
     <input type="text" data-tabindex="1" />
     <input type="text" data-tabindex="2" />
-    
+
 See the stackable example on the [demo](http://jschr.github.com/bootstrap-modal/) page for an example.
 
 

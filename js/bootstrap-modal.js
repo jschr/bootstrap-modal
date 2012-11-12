@@ -121,7 +121,7 @@
 
 		tab: function () {
 			var that = this;
-			if (this.isShown && this.options.keyboard) {
+			if (this.isShown && this.options.consumeTab) {
 				if (!this.$element.attr('tabindex')) this.$element.attr('tabindex', -1);
 				
 				this.$element.on('keydown.tabindex.modal', '[data-tabindex]', function(e){
@@ -313,6 +313,7 @@
 		height: null,
 		maxHeight: null,
 		modalOverflow: false,
+		consumeTab: true,
 		focusOn: null,
 		attentionAnimation: 'shake',
 		manager: function(){ return GlobalModalManager },
