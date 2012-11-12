@@ -219,8 +219,8 @@
 
 		backdrop: function (modal, callback) {
 			var animate = modal.$element.hasClass('fade') ? 'fade' : '',
-				showBackdrop = $.extend({}, this.options, modal.options).backdrop
-					&& this.backdropCount < this.options.backdropLimit;
+				showBackdrop = modal.options.backdrop && 
+					this.backdropCount < this.options.backdropLimit;
 
 			if (modal.isShown && showBackdrop) {
 				var doAnimate = $.support.transition && animate && !this.isLoading;
@@ -365,7 +365,6 @@
 	}
 
 	$.fn.modalmanager.defaults = {
-		backdrop: true,
 		backdropLimit: 999,
 		spinner: '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}

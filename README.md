@@ -52,7 +52,13 @@ Set the max-height of the modal.
 Toggle the loading state.
 
 + **spinner**
-Provide a custom image or animation for the loading spinner
+Provide a custom image or animation for the loading spinner.
+
++ **focusOn**
+The element or selector to set the focus too once the modal is shown.
+
++ **attentionAnimation**
+Set the animation used by the `attention()` method. Any animation in [animate.css](http://daneden.me/animate/) is supported.
 
 + **modalOverflow**
 Set this property to true for modals with highly dynamic content. This will force the modal behave as if it is larger then the viewport.
@@ -61,8 +67,11 @@ Set this property to true for modals with highly dynamic content. This will forc
 Set the modal's manager. By default this is set to the GlobalModalManager and will most likely not need to be overridden.
 
 **ModalManager**
++ **backdropLimit**
+Limit the amount of backdrops that will appear on the page at the same time.
+
 + **spinner**
-Provide a custom image or animation for the loading spinner
+Provide a custom image or animation for the loading spinner.
 
 Disable Background Scrolling
 -----------
@@ -93,12 +102,14 @@ You can bind the the height of the modal body to the window with something like 
 	
 **Note:** This will be overwritten by the responsiveness and is only set when the modal is displayed, not when the window is resized.
 	
-Known Issues
+Tab Index for Modal Forms
 -----------
+You can use `data-tabindex` instead of the default `tabindex` to specify the tabindex within a modal.
 
-On mobile safari, the background page will still scroll if the modal is smaller then the window size. We get desired behaviour if the modal is larger then the window however. 
-
-It seems like iOS6 has somewhat resolved this issue but is still not perfect.
+    <input type="text" data-tabindex="1" />
+    <input type="text" data-tabindex="2" />
+    
+See the stackable example on the [demo](http://jschr.github.com/bootstrap-modal/) page for an example.
 
 
 	
