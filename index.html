@@ -14,7 +14,6 @@
 </style>
   <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
   <link href="css/bootstrap-modal.css" rel="stylesheet"></link>
-  <link href="css/animate.css" rel="stylesheet"></link>
 <style>      
   .text-center { 
     text-align: center; 
@@ -89,7 +88,7 @@
 
           <div class="static" style="position: relative; overflow: hidden">
             <h3>Static Background with Animation</h3>
-            <p>Animation is via <a href="http://daneden.me/animate/">animate.css</a> so you will need to include the css file in your project.</p>
+            <p>The shake animation is included in bootstrap-modal but any animation in <a href="http://daneden.me/animate/">animate.css</a> is supported, just include the css file in your project.</p>
             <pre class="pre-scrollable prettyprint linenums" data-source="#static">
             </pre>
             <div class="text-center">
@@ -230,13 +229,13 @@
   </div>
 </div>
 
-<div id="static" class="modal hide fade" tabindex="-1" data-backdrop="static">
+<div id="static" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
   <div class="modal-body">
     <p>Would you like to continue with some arbitrary task?</p>
   </div>
   <div class="modal-footer">
-    <button type="button" data-dismiss="modal" class="btn">No</button>
-    <button type="button" data-dismiss="modal" class="btn btn-primary">Yes Please</button>
+    <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+    <button type="button" data-dismiss="modal" class="btn btn-primary">Continue Task</button>
   </div>
 </div>
 
