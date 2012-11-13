@@ -285,7 +285,8 @@
 					.addClass('in');
 
 				this.$spinner = $(this.createContainer())
-					.append($spinner);
+					.append($spinner)
+					.on('click.modalmanager', $.proxy(this.loading, this));
 
 				this.isLoading = true;
 

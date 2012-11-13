@@ -107,6 +107,16 @@
   				</div>
           <br />
 
+          <div class="long" style="position: relative; overflow: hidden">
+            <h3>Long Modals</h3>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#long">
+            </pre>
+            <div class="text-center">
+            <button class="demo btn btn-primary btn-large" data-toggle="modal" href="#long">View Demo</button>
+            </div>
+          </div>
+          <br />
+
 		    </div>
 	    </div>
 	  </div>
@@ -115,7 +125,7 @@
 <div id="responsive" class="modal hide fade" tabindex="-1" data-width="760">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
+    <h3>Responsive</h3>
   </div>
   <div class="modal-body">
     <div class="row-fluid">
@@ -150,7 +160,7 @@
 <div id="full-width" class="modal container hide fade" tabindex="-1">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
+    <h3>Full Width</h3>
   </div>
   <div class="modal-body">
     <p>This modal will resize itself to the same dimensions as the container class.</p>
@@ -165,7 +175,7 @@
 <div id="stack1" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
+    <h3>Stack One</h3>
   </div>
   <div class="modal-body">
     <p>One fine body…</p>
@@ -184,7 +194,7 @@
 <div id="stack2" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
+    <h3>Stack Two</h3>
   </div>
   <div class="modal-body">
     <p>One fine body…</p>
@@ -202,26 +212,12 @@
 <div id="stack3" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
+    <h3>Stack Three</h3>
   </div>
   <div class="modal-body">
     <p>One fine body…</p>
     <input type="text" data-tabindex="1" />
     <input type="text" data-tabindex="2" />
-  </div>
-  <div class="modal-footer">
-    <button type="button" data-dismiss="modal" class="btn">Close</button>
-    <button type="button" class="btn btn-primary">Ok</button>
-  </div>
-</div>
-
-<div id="myModal" class="modal hide fade" tabindex="-1">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>This modal is in a custom manager</p>
   </div>
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
@@ -236,6 +232,33 @@
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Cancel</button>
     <button type="button" data-dismiss="modal" class="btn btn-primary">Continue Task</button>
+  </div>
+</div>
+
+<div id="long" class="modal hide fade" tabindex="-1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>A Fairly Long Modal</h3>
+  </div>
+  <div class="modal-body">
+    <img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg" />
+     <button class="btn" data-toggle="modal" href="#notlong">Not So Long Modal</button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+  </div>
+</div>
+
+<div id="notlong" class="modal hide fade" tabindex="-1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Not That Long</h3>
+  </div>
+  <div class="modal-body" style="height: 400px; overflow: hidden;">
+    <img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg" />
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
   </div>
 </div>
 
