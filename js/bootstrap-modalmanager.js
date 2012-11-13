@@ -49,7 +49,7 @@
 
 			var that = this;
 
-			modal.$element.on('show.modalmanager', targetIsModal(function(e){
+			modal.$element.on('show.modalmanager', targetIsSelf(function(e){
 				modal.isShown = true;
 
 				var transition = $.support.transition && modal.$element.hasClass('fade');
@@ -93,7 +93,7 @@
 				});
 			}));
 
-			modal.$element.on('hidden.modalmanager', targetIsModal(function(e){
+			modal.$element.on('hidden.modalmanager', targetIsSelf(function(e){
 
 				that.backdrop(modal);
 
@@ -107,7 +107,7 @@
 
 			}));
 
-			modal.$element.on('destroy.modalmanager', targetIsModal(function(e){
+			modal.$element.on('destroy.modalmanager', targetIsSelf(function(e){
 				that.removeModal(modal);
 			}));
 		},
@@ -203,15 +203,13 @@
 				.appendTo(this.$element);
 
 			if (modal && modal.options.backdrop != 'static') {
-				$container.on('click.modal', function(e){
-					if (e.target !== $container[0]) return;
+				$container.on('click.modal', targetIsSelf(function(e){
 					modal.hide();
-				});
+				}));
 			} else if (modal) {
-				$container.on('click.modal', function(e){
-					if (e.target !== $container[0]) return;		
+				$container.on('click.modal', targetIsSelf(function(e){
 					modal.attention();
-				});
+				}));
 			}
 
 			return $container;
@@ -344,7 +342,7 @@
 	// make sure the event target is the modal itself in order to prevent 
 	// other components such as tabsfrom triggering the modal manager. 
 	// if Boostsrap namespaced events, this would not be needed.
-	function targetIsModal(callback){
+	function targetIsSelf(callback){
 		return function(e){
 			if (this === e.target){
 				callback.apply(this, arguments);
