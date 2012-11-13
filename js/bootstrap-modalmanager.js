@@ -113,7 +113,6 @@
 		},
 
 		destroyModal: function(modal){
-			this.removeContainer(modal);
 
 			modal.destroy();
 
@@ -125,6 +124,8 @@
 				this.$element.removeClass('page-overflow');
 			}
 
+			this.removeContainer(modal);
+			
 			this.setFocus();
 		},
 
