@@ -129,7 +129,7 @@
 				        var $next = $(this), 
 				        	$rollover = $(this);
 				        
-				       that.$element.find('[data-tabindex]').each(function(e){
+				       that.$element.find('[data-tabindex]:enabled:not([readonly])').each(function(e){
 			         		if (!e.shiftKey){
 			           	 		$next = $next.data('tabindex') < $(this).data('tabindex') ?
 				              		$next = $(this) :
