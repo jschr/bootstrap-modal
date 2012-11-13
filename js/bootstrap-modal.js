@@ -52,6 +52,8 @@
 			var that = this, 
 				e = $.Event('show');
 			
+			if (this.isShown) return;
+
 			this.$element.triggerHandler(e);
 
 			if (e.isDefaultPrevented()) return;

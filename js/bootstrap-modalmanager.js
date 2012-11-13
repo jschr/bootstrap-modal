@@ -125,7 +125,7 @@
 			}
 
 			this.removeContainer(modal);
-			
+
 			this.setFocus();
 		},
 
