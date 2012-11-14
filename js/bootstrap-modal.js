@@ -32,7 +32,7 @@
 
 		constructor: Modal, 
 		
-		init: function(element, options){
+		init: function (element, options) {
 			this.options = options;
 		
 			this.$element = $(element)
@@ -40,8 +40,10 @@
 				
 			this.options.remote && this.$element.find('.modal-body').load(this.options.remote);
 			
-			var manager = typeof this.options.manager === 'function' ? this.options.manager.call(this) : this.options.manager;
-			manager && manager.appendModal && manager.appendModal(this);
+			var manager = typeof this.options.manager === 'function' ? 
+				this.options.manager.call(this) : this.options.manager;
+
+			manager && manager.appendModal(this);
 		}, 
 		
 		toggle: function () {
@@ -62,7 +64,7 @@
 				this.$element.css('width', this.options.width);
 				
 				var that = this;
-				this.$element.css('margin-left', function(){
+				this.$element.css('margin-left', function () {
 					if (/%/ig.test(that.options.width)){
 						return -(parseInt(that.options.width) / 2) + '%';
 					} else {
@@ -70,9 +72,9 @@
 					}
 				});
 			}
-
 		
 			var prop = this.options.height ? 'height' : 'max-height';
+
 			var value = this.options.height || this.options.maxHeight;
 			
 			if (value){
@@ -90,8 +92,6 @@
 		
 		hide: function (e) {
 			e && e.preventDefault();
-
-			var that = this;
 
 			e = $.Event('hide');
 
@@ -112,7 +112,7 @@
 			this.$element
 				.removeClass('in')
 				.removeClass('animated')
-				.removeClass(that.options.attentionAnimation)
+				.removeClass(this.options.attentionAnimation)
 				.removeClass('modal-overflow')
 				.attr('aria-hidden', true);
 
@@ -123,15 +123,14 @@
 
 		tab: function () {
 			var that = this;
-			if (this.isShown && this.options.consumeTab) {
-				if (!this.$element.attr('tabindex')) this.$element.attr('tabindex', -1);
-				
-				this.$element.on('keydown.tabindex.modal', '[data-tabindex]', function(e){
-			    	if (e.keyCode && e.keyCode == 9){
+
+			if (this.isShown && this.options.consumeTab) {			
+				this.$element.on('keydown.tabindex.modal', '[data-tabindex]', function (e) {		    	
+			    	if (e.keyCode && e.keyCode == 9){	       
 				        var $next = $(this), 
 				        	$rollover = $(this);
 				        
-				       that.$element.find('[data-tabindex]:enabled:not([readonly])').each(function(e){
+				       	that.$element.find('[data-tabindex]:enabled:not([readonly])').each(function (e) {
 			         		if (!e.shiftKey){
 			           	 		$next = $next.data('tabindex') < $(this).data('tabindex') ?
 				              		$next = $(this) :
@@ -147,10 +146,11 @@
 			          		$next.focus() : $rollover.focus();
 
 				        e.preventDefault();
+
 			      	}
 			    });
 			} else if (!this.isShown) {
-				this.$element.off('keydown.tabindex.modal')
+				this.$element.off('keydown.tabindex.modal');
 			}
 		}, 
 		
@@ -197,14 +197,14 @@
 
 		}, 
 
-		removeLoading: function(){
+		removeLoading: function () {
 			this.$loading.remove();
 			this.$loading = null;
 			this.isLoading = false;
 		},
 		
-		loading: function(callback){
-			callback = callback || function(){};
+		loading: function (callback) {
+			callback = callback || function () {};
 		
 			var animate = this.$element.hasClass('fade') ? 'fade' : '';
 			
@@ -230,7 +230,7 @@
 
 				var that = this;
 				$.support.transition && this.$element.hasClass('fade')?
-					this.$loading.one($.support.transition.end, function(){ that.removeLoading() }) :
+					this.$loading.one($.support.transition.end, function () { that.removeLoading() }) :
 					that.removeLoading();
 
 			} else if (callback) {
@@ -238,7 +238,7 @@
 			}
 		},
 		
-		focus: function(){
+		focus: function () {
 			var $focusElem = this.$element.find(this.options.focusOn);
 
 			$focusElem = $focusElem.length ? $focusElem : this.$element;
@@ -246,7 +246,7 @@
 			$focusElem.focus();
 		},
 
-		attention: function(){
+		attention: function (){
 			// NOTE: transitionEnd with keyframes causes odd behaviour
 
 			this.$element
@@ -255,7 +255,7 @@
 
 			var that = this;
 
-			setTimeout(function(){
+			setTimeout(function () {
 				that.$element
 					.addClass('animated')
 					.addClass(that.options.attentionAnimation);
@@ -266,7 +266,7 @@
 		},
 		
 
-		destroy: function(){
+		destroy: function () {
 			var e = $.Event('destroy');
 			this.$element.triggerHandler(e);
 			if (e.isDefaultPrevented()) return;
@@ -274,7 +274,7 @@
 			this.teardown();
 		},
 		
-		teardown: function(){	
+		teardown: function () {	
 			if (!this.$parent.length){
 				this.$element.remove();
 				this.$element = null;
@@ -318,10 +318,9 @@
 		consumeTab: true,
 		focusOn: null,
 		attentionAnimation: 'shake',
-		manager: function(){ 
+		manager: function () { 
 			// create default manager is one doesn't exist
-			if (!window.GlobalModalManager) window.GlobalModalManager = new ModalManager('body');
-			return window.GlobalModalManager;
+			return (window.GlobalModalManager = window.GlobalModalManager || new ModalManager('body'));
 		},
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}

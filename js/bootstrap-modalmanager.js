@@ -16,7 +16,7 @@
  * limitations under the License.
  * ========================================================== */
 
-!function($){
+!function ($) {
 
 	"use strict"; // jshint ;_;
 
@@ -33,23 +33,23 @@
 
 		constructor: ModalManager,
 
-		init: function(element, options){
+		init: function (element, options) {
 			this.$element = $(element);
 			this.options = $.extend({}, $.fn.modalmanager.defaults, this.$element.data(), typeof options == 'object' && options);
 			this.stack = [];
 			this.backdropCount = 0;
 		},
 
-		createModal: function(element, options){
+		createModal: function (element, options) {
 			$(element).modal($.extend({ manager: this }, options));
 		},
 
-		appendModal: function(modal){
+		appendModal: function (modal) {
 			this.stack.push(modal);
 
 			var that = this;
 
-			modal.$element.on('show.modalmanager', targetIsSelf(function(e){
+			modal.$element.on('show.modalmanager', targetIsSelf(function (e) {
 				modal.isShown = true;
 
 				var transition = $.support.transition && modal.$element.hasClass('fade');
@@ -82,7 +82,7 @@
 						.addClass('in')
 						.attr('aria-hidden', false);
 					
-					var complete = function(){
+					var complete = function () {
 						that.setFocus();
 						modal.$element.triggerHandler('shown');
 					}
@@ -93,13 +93,13 @@
 				});
 			}));
 
-			modal.$element.on('hidden.modalmanager', targetIsSelf(function(e){
+			modal.$element.on('hidden.modalmanager', targetIsSelf(function (e) {
 
 				that.backdrop(modal);
 
 				if (modal.$backdrop){
 					$.support.transition && modal.$element.hasClass('fade')?
-						modal.$backdrop.one($.support.transition.end, function(){ that.destroyModal(modal) }) :
+						modal.$backdrop.one($.support.transition.end, function () { that.destroyModal(modal) }) :
 						that.destroyModal(modal);
 				} else {
 					that.destroyModal(modal);
@@ -107,12 +107,12 @@
 
 			}));
 
-			modal.$element.on('destroy.modalmanager', targetIsSelf(function(e){
+			modal.$element.on('destroy.modalmanager', targetIsSelf(function (e) {
 				that.removeModal(modal);
 			}));
 		},
 
-		destroyModal: function(modal){
+		destroyModal: function (modal) {
 
 			modal.destroy();
 
@@ -129,7 +129,7 @@
 			this.setFocus();
 		},
 
-		hasOpenModal: function(){
+		hasOpenModal: function () {
 			for (var i = 0; i < this.stack.length; i++){
 				if (this.stack[i].isShown) return true;
 			}
@@ -150,17 +150,17 @@
 
 		},
 
-		removeModal: function(modal){
+		removeModal: function (modal) {
 			modal.$element.off('.modalmanager');
 			if (modal.$backdrop) this.removeBackdrop.call(modal);
 			this.stack.splice(this.getIndexOfModal(modal), 1);
 		},
 
-		getModalAt: function(index){
+		getModalAt: function (index) {
 			return this.stack[index];
 		},
 
-		getIndexOfModal: function(modal){
+		getIndexOfModal: function (modal) {
 			for (var i = 0; i < this.stack.length; i++){
 				if (modal === this.stack[i]) return i;
 			}
@@ -171,7 +171,7 @@
 			modal.$backdrop = null;
 		}, 
 
-		createBackdrop: function(animate){
+		createBackdrop: function (animate) {
 			var $backdrop;
 
 			if (!this.isLoading) {
@@ -194,7 +194,7 @@
 			modal.$container = null;
 		}, 
 
-		createContainer: function(modal){
+		createContainer: function (modal) {
 			var $container;
 
 			$container = $('<div class="modal-scrollable">')
@@ -203,11 +203,11 @@
 				.appendTo(this.$element);
 
 			if (modal && modal.options.backdrop != 'static') {
-				$container.on('click.modal', targetIsSelf(function(e){
+				$container.on('click.modal', targetIsSelf(function (e) {
 					modal.hide();
 				}));
 			} else if (modal) {
-				$container.on('click.modal', targetIsSelf(function(e){
+				$container.on('click.modal', targetIsSelf(function (e) {
 					modal.attention();
 				}));
 			}
@@ -247,7 +247,7 @@
 				var that = this;
 
 				$.support.transition && modal.$element.hasClass('fade')?
-					modal.$backdrop.one($.support.transition.end, function(){ that.removeBackdrop(modal) }) :
+					modal.$backdrop.one($.support.transition.end, function () { that.removeBackdrop(modal) }) :
 					that.removeBackdrop(modal);
 
 			} else if (callback) {
@@ -255,14 +255,14 @@
 			}
 		},
 
-		removeLoading: function(){
+		removeLoading: function () {
 			this.$loading && this.$loading.remove();
 			this.$loading = null;
 			this.isLoading = false;
 		},
 
-		loading: function(callback){
-			callback = callback || function(){ };
+		loading: function (callback) {
+			callback = callback || function () { };
 			
 			this.$element
 				.toggleClass('modal-open', !this.isLoading || this.hasOpenModal())
@@ -300,7 +300,7 @@
 
 				var that = this;
 				$.support.transition ?
-					this.$loading.one($.support.transition.end, function(){ that.removeLoading() }) :
+					this.$loading.one($.support.transition.end, function () { that.removeLoading() }) :
 					that.removeLoading();
 
 			} else if (callback) {
@@ -313,11 +313,11 @@
 	* ======================= */
 
 	// computes and caches the zindexes
-	var getzIndex = (function(){
+	var getzIndex = (function () {
 		var zIndexFactor, 
 			baseIndex = {};
 
-		return function(type, pos){
+		return function (type, pos) {
 
 			if (typeof zIndexFactor === 'undefined'){
 				var $baseModal = $('<div class="modal hide" />').appendTo('body'),
@@ -341,7 +341,7 @@
 	// other components such as tabsfrom triggering the modal manager. 
 	// if Boostsrap namespaced events, this would not be needed.
 	function targetIsSelf(callback){
-		return function(e){
+		return function (e) {
 			if (this === e.target){
 				callback.apply(this, arguments);
 			}
