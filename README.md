@@ -1,4 +1,4 @@
-Bootstrap Modal
+Bootstrap Modal v2.0
 =============
 
 See live demo [here](http://jschr.github.com/bootstrap-modal/).
@@ -9,7 +9,7 @@ A single ModalManager is created by default on body and can be accessed through 
 
     $('body').modalmanager('loading');
 
-Can be used as a replacement for Bootstrap's Modal class or as a patch to the library.
+Bootstrap-Modal can be used as a replacement for Bootstrap's Modal class or as a patch to the library.
 
 Overview
 -----------
@@ -24,7 +24,7 @@ Overview
 Installation 
 -----------
 + Include `css/bootstrap-modal.css` after the main bootstrap css files.
-+ Include `js/bootstrap-modalmanager.js` and `js/bootstrap-modal.js` after the main bootstrap js files. Note that `bootstrap-modal` must be included **after** `bootstrap-modalmanager`.
++ Include `js/bootstrap-modalmanager.js` and `js/bootstrap-modal.js` after the main bootstrap js files.
 
 	<link href="css/bootstrap.css" rel="stylesheet" />
 	<link href="css/bootstrap-responsive.css" rel="stylesheet" />
@@ -63,7 +63,7 @@ Used to enable tabindexing for modals with `data-tabindex`. This is set to true 
 The element or selector to set the focus too once the modal is shown.
 
 + **attentionAnimation**
-Set the animation used by the `attention()` method. Any animation in [animate.css](http://daneden.me/animate/) is supported but only the `shake` animation is included by default.
+Set the animation used by the `attention` method. Any animation in [animate.css](http://daneden.me/animate/) is supported but only the *shake* animation is included by default.
 
 + **modalOverflow**
 Set this property to true for modals with highly dynamic content. This will force the modal to behave as if it is larger then the viewport.
