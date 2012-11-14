@@ -27,8 +27,6 @@
 		this.init(element, options);
 	}
 
-	window.ModalManager = ModalManager;
-
 	ModalManager.prototype = {
 
 		constructor: ModalManager,
@@ -357,7 +355,7 @@
 			var $this = $(this), 
 				data = $this.data('modalmanager');
 
-			if (!data) $this.data('modalmanager', (data = new ModalManager(this, options)))
+			if (!data) $this.data('modalmanager', (data = new ModalManager(this, option)))
 			if (typeof option == 'string') data[option]()
 		})
 	}

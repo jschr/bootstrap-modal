@@ -43,7 +43,10 @@
 			var manager = typeof this.options.manager === 'function' ? 
 				this.options.manager.call(this) : this.options.manager;
 
-			manager && manager.appendModal(this);
+			manager = manager.appendModal ? 
+				manager : $(manager).modalmanager().data('modalmanager');
+
+			manager.appendModal(this);
 		}, 
 		
 		toggle: function () {
@@ -318,10 +321,7 @@
 		consumeTab: true,
 		focusOn: null,
 		attentionAnimation: 'shake',
-		manager: function () { 
-			// create default manager is one doesn't exist
-			return (window.GlobalModalManager = window.GlobalModalManager || new ModalManager('body'));
-		},
+		manager: 'body',
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}
 

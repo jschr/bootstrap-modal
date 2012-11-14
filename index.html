@@ -336,7 +336,7 @@ var $modal = $('#ajax-modal');
 
 $('.ajax .demo').on('click', function(){
   // create the backdrop and wait for next modal to be triggered
-  GlobalModalManager.loading();
+  $('body').modalmanager('loading');
 
   setTimeout(function(){
      $modal.load('modal_ajax_test.html', '', function(){
