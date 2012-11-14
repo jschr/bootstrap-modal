@@ -46,7 +46,7 @@ Set the inital width of the modal.
 Set the inital height of the modal.
 
 + **maxHeight**
-Set the max-height of the modal.
+Set the max-height of the modal-body.
 
 + **loading**
 Toggle the loading state.
@@ -61,15 +61,16 @@ Used to enable tabindexing for modals with `data-tabindex`. This is set to true 
 The element or selector to set the focus too once the modal is shown.
 
 + **attentionAnimation**
-Set the animation used by the `attention()` method. Any animation in [animate.css](http://daneden.me/animate/) is supported.
+Set the animation used by the `attention()` method. Any animation in [animate.css](http://daneden.me/animate/) is supported but only the `shake` animation is included by default.
 
 + **modalOverflow**
-Set this property to true for modals with highly dynamic content. This will force the modal behave as if it is larger then the viewport.
+Set this property to true for modals with highly dynamic content. This will force the modal to behave as if it is larger then the viewport.
 
 + **manager**
-Set the modal's manager. By default this is set to the GlobalModalManager and will most likely not need to be overridden.
+Set the modal's manager. By default this is set to the `GlobalModalManager` and will most likely not need to be overridden.
 
 **ModalManager**
+
 + **backdropLimit**
 Limit the amount of backdrops that will appear on the page at the same time.
 
@@ -79,19 +80,16 @@ Provide a custom image or animation for the loading spinner.
 Disable Background Scrolling
 -----------
 
-If you want to prevent the background page from scrolling (see [demo](http://jschr.github.com/bootstrap-modal/) for example) there is one extra step required. You must wrap the page contents in a `<div class="page-container">` and provide a `<div class="modal-container">`. For example:
+If you want to prevent the background page from scrolling (see [demo](http://jschr.github.com/bootstrap-modal/) for example) you must wrap the page contents in a `<div class="page-container">`. For example:
 
 	<body>
 		<div class="page-container">
 			<div class="navbar navbar-fixed-top">...</div>
 			<div class="container">...</div>
 		</div>
-		<div class="modal-container">
-			<!-- You can put your modal definitions here but it is not required -->
-		</div>
 	</body>
 
-The reason for doing this instead of just simply setting `overflow: hidden` when a modal is open is because I wanted to avoid having the page shift as a result of the scrollbar appearing/disappearing. I also require that the document be scrollable when there is a tall modal but only wanted it to scroll to fit the height of the modal, not the entire page.
+The reason for doing this instead of just simply setting `overflow: hidden` when a modal is open is to avoid having the page shift as a result of the scrollbar appearing/disappearing. This also allows the document to be scrollable when there is a tall modal but only to the height of the modal, not the entire page.
 
 Constrain Modal to Window Size
 -----------
