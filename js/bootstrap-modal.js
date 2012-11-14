@@ -283,7 +283,10 @@
 			if (!this.$parent.length){
 				this.$element.remove();
 				this.$element = null;
-			} else {
+				return;
+			}
+
+			if (this.$parent !== this.$element.parent()){
 				this.$element.appendTo(this.$parent);
 			}
 
