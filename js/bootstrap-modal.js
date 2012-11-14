@@ -318,7 +318,11 @@
 		consumeTab: true,
 		focusOn: null,
 		attentionAnimation: 'shake',
-		manager: function(){ return GlobalModalManager },
+		manager: function(){ 
+			// create default manager is one doesn't exist
+			if (!window.GlobalModalManager) window.GlobalModalManager = new ModalManager('body');
+			return window.GlobalModalManager;
+		},
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}
 

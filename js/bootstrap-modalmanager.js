@@ -306,9 +306,7 @@
 			} else if (callback) {
 				callback(this.isLoading);
 			}
-		},
-
-		toggleLoading: function(callback){ this.loading(callback); }
+		}
 	}
 
 	/* PRIVATE METHODS
@@ -356,8 +354,8 @@
 
 	$.fn.modalmanager = function (option) {
 		return this.each(function () {
-			var $this = $(this)
-			, data = $this.data('modalmanager');
+			var $this = $(this), 
+				data = $this.data('modalmanager');
 
 			if (!data) $this.data('modalmanager', (data = new ModalManager(this, options)))
 			if (typeof option == 'string') data[option]()
@@ -370,10 +368,5 @@
 	}
 
 	$.fn.modalmanager.Constructor = ModalManager
-
-	// Create a default global modal manager 
-	$(function(){
-		window.GlobalModalManager = new ModalManager('body');
-	})
 
 }(jQuery);
