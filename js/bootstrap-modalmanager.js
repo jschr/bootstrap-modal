@@ -341,8 +341,8 @@
 	function targetIsSelf(callback){
 		return function (e) {
 			if (this === e.target){
-				callback.apply(this, arguments);
-			}
+				return callback.apply(this, arguments);
+			} 
 		}
 	}
 
@@ -356,7 +356,7 @@
 				data = $this.data('modalmanager');
 
 			if (!data) $this.data('modalmanager', (data = new ModalManager(this, option)))
-			if (typeof option == 'string') data[option]()
+			if (typeof option === 'string') data[option]()
 		})
 	}
 
