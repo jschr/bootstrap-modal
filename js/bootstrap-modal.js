@@ -252,17 +252,19 @@
 		attention: function (){
 			// NOTE: transitionEnd with keyframes causes odd behaviour
 
-			this.$element
-				.removeClass('animated')
-				.removeClass(this.options.attentionAnimation);
+			if (this.options.attentionAnimation){
+				this.$element
+					.removeClass('animated')
+					.removeClass(this.options.attentionAnimation);
 
-			var that = this;
+				var that = this;
 
-			setTimeout(function () {
-				that.$element
-					.addClass('animated')
-					.addClass(that.options.attentionAnimation);
-			}, 0);
+				setTimeout(function () {
+					that.$element
+						.addClass('animated')
+						.addClass(that.options.attentionAnimation);
+				}, 0);
+			}
 
 
 			this.focus();
