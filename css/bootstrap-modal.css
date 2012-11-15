@@ -7,7 +7,7 @@
  *
  */
 
-.modal-open.has-modal-container {
+.modal-open {
 	position: relative; /* safari */
 	overflow: hidden;
 }
@@ -17,7 +17,7 @@
 .modal-open.page-overflow .page-container,
 .modal-open.page-overflow .page-container .navbar-fixed-top,
 .modal-open.page-overflow .page-container .navbar-fixed-bottom,
-.modal-open.page-overflow .modal-container  {
+.modal-open.page-overflow .modal-scrollable {
 	overflow-y: scroll;
 }
 
@@ -28,19 +28,14 @@
 	}
 }
 
-.modal-container {
-	display: none;
+
+.modal-scrollable {
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	overflow: auto;
-	z-index: 9999;
-}
-
-.modal-open > .modal-container {
-	display: block;
 }
 
 .modal {
@@ -83,12 +78,6 @@
 	border-radius: 6px;
 }
 
-.modal-spinner {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-}
-
 .modal-backdrop.modal-absolute{
 	position: absolute;
 	z-index: 940;
@@ -110,7 +99,6 @@
 
 .modal-overflow.modal {
 	top: 1%;
-	/*bottom: 1%;*/
 }
 
 .modal-overflow.modal.fade {
@@ -119,32 +107,12 @@
 
 .modal-overflow.modal.fade.in {
 	top: 1%;
-	/*bottom: 1%;*/
 }
 
 .modal-overflow .modal-body {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
-
-/*.modal-overflow .modal-body {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
-	margin-top: 48px; // header height
-	margin-bottom: 60px; // footer height
-	overflow: auto;
-}
-
-
-.modal-overflow .modal-footer {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	left: 0;
-}*/
 
 /* Responsive */
 
@@ -196,4 +164,52 @@
 	top: 50%;
 	left: 50%;
 	margin: -12px 0 0 -12px;
+}
+
+/*
+Animate.css - http://daneden.me/animate
+Licensed under the ☺ license (http://licence.visualidiot.com/)
+
+Copyright (c) 2012 Dan Eden*/
+
+.animated {
+	-webkit-animation-duration: 1s;
+	   -moz-animation-duration: 1s;
+	     -o-animation-duration: 1s;
+	        animation-duration: 1s;
+	-webkit-animation-fill-mode: both;
+	   -moz-animation-fill-mode: both;
+	     -o-animation-fill-mode: both;
+	        animation-fill-mode: both;
+}
+
+@-webkit-keyframes shake {
+	0%, 100% {-webkit-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
+}
+
+@-moz-keyframes shake {
+	0%, 100% {-moz-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-moz-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-moz-transform: translateX(10px);}
+}
+
+@-o-keyframes shake {
+	0%, 100% {-o-transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {-o-transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {-o-transform: translateX(10px);}
+}
+
+@keyframes shake {
+	0%, 100% {transform: translateX(0);}
+	10%, 30%, 50%, 70%, 90% {transform: translateX(-10px);}
+	20%, 40%, 60%, 80% {transform: translateX(10px);}
+}
+
+.shake {
+	-webkit-animation-name: shake;
+	-moz-animation-name: shake;
+	-o-animation-name: shake;
+	animation-name: shake;
 }
