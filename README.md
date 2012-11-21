@@ -60,7 +60,7 @@ Provide a custom image or animation for the loading spinner.
 Used to enable tabindexing for modals with `data-tabindex`. This is set to true by default.
 
 + **focusOn**
-The element or selector to set the focus too once the modal is shown.
+The element or selector to set the focus to once the modal is shown.
 
 + **attentionAnimation**
 Set the animation used by the `attention` method. Any animation in [animate.css](http://daneden.me/animate/) is supported but only the *shake* animation is included by default.
