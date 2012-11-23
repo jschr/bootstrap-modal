@@ -66,7 +66,7 @@ The element or selector to set the focus to once the modal is shown.
 Set the animation used by the `attention` method. Any animation in [animate.css](http://daneden.me/animate/) is supported but only the *shake* animation is included by default.
 
 + **modalOverflow**
-Set this property to true for modals with highly dynamic content. This will force the modal to behave as if it is larger then the viewport.
+Set this property to true for modals with highly dynamic content. This will force the modal to behave as if it is larger than the viewport.
 
 + **manager**
 Set the modal's manager. By default this is set to the `GlobalModalManager` and will most likely not need to be overridden.
