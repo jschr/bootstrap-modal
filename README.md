@@ -1,4 +1,4 @@
-Bootstrap Modal v2.0
+Bootstrap Modal v2.1
 =============
 
 See live demo [here](http://jschr.github.com/bootstrap-modal/).
