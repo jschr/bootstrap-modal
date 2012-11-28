@@ -127,9 +127,23 @@
 		tab: function () {
 			var that = this;
 
-			if (this.isShown && this.options.consumeTab) {			
+			if (this.isShown && this.options.consumeTab) {	
+				/*this.$element.on('keydown.tabindex.modal', function(e){
+					if (e.keyCode && e.keyCode == 9){
+						setTimeout(function(){
+							var $active = $(document.activeElement);
+
+							if (!$active.closest(that.$element).length){
+								setTimeout(function(){
+									that.$element.click();
+								}, 0);
+							}
+						}, 0);
+					}
+				});*/
+
 				this.$element.on('keydown.tabindex.modal', '[data-tabindex]', function (e) {		    	
-			    	if (e.keyCode && e.keyCode == 9){	       
+			    	if (e.keyCode && e.keyCode == 9){
 				        var $next = $(this), 
 				        	$rollover = $(this);
 				        
@@ -145,10 +159,15 @@
 				          	}
 				        });
 
+				       /*if ($next[0] !== $(this)[0]){
+				       		$next.focus();
+				       		 e.preventDefault();
+				       	}*/ 
+
 				        $next[0] !== $(this)[0] ?
 			          		$next.focus() : $rollover.focus();
 
-				        e.preventDefault();
+				       
 
 			      	}
 			    });
@@ -187,7 +206,6 @@
 			this.$element
 				.hide()
 				.triggerHandler('hidden');
-
 
 			var prop = this.options.height ? 'height' : 'max-height';
 			var value = this.options.height || this.options.maxHeight;
@@ -325,6 +343,7 @@
 		modalOverflow: false,
 		consumeTab: true,
 		focusOn: null,
+		replace: false,
 		attentionAnimation: 'shake',
 		manager: 'body',
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
