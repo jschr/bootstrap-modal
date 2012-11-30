@@ -67,8 +67,6 @@
 
 			this.tab();
 
-			this.resize();
-
 			this.options.loading && this.loading();
 		}, 
 		
@@ -86,8 +84,6 @@
 			this.escape();
 
 			this.tab();
-
-			this.resize();
 			
 			this.isLoading && this.loading();
 
@@ -104,20 +100,6 @@
 				this.hideWithTransition() :
 				this.hideModal();
 		}, 
-
-		resize: function () {
-			var resizeTimeout,
-				that = this;
-
-			if (this.isShown && this.options.resize) {
-				$(window).on('resize.modal', function(){
-					resizeTimeout && clearTimeout(resizeTimeout);
-					resizeTimeout = setTimeout($.proxy(that.layout, that), 10);
-				});
-			} else if (!this.isShown) {
-				$(window).off('resize.modal');
-			}
-		},
 
 		layout: function () {
 			var prop = this.options.height ? 'height' : 'max-height',

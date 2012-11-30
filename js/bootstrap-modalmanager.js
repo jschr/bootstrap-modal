@@ -36,6 +36,20 @@
 			this.options = $.extend({}, $.fn.modalmanager.defaults, this.$element.data(), typeof options == 'object' && options);
 			this.stack = [];
 			this.backdropCount = 0;
+
+			if (this.options.resize) {
+				var resizeTimeout,
+					that = this;
+
+				$(window).on('resize.modal', function(){
+					resizeTimeout && clearTimeout(resizeTimeout);
+					resizeTimeout = setTimeout(function(){
+						for (var i = 0; i < that.stack.length; i++){
+							that.stack[i].isShown && that.stack[i].layout();
+						};
+					}, 10);
+				});
+			}
 		},
 
 		createModal: function (element, options) {
@@ -385,6 +399,7 @@
 
 	$.fn.modalmanager.defaults = {
 		backdropLimit: 999,
+		resize: false,
 		spinner: '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
 	}
 
