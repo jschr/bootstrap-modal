@@ -63,8 +63,6 @@
 
 					modal.$element.appendTo(modal.$container);
 
-					var modalOverflow = $(window).height() < modal.$element.height() || modal.options.modalOverflow;
-					
 					that.backdrop(modal, function () {
 
 						modal.$element.show();
@@ -75,9 +73,9 @@
 							modal.$element.one($.support.transition.end, function () { modal.$element[0].style.display = 'block' });
 						}
 
+						modal.layout();
+
 						modal.$element
-							.toggleClass('modal-overflow', modalOverflow)
-							.css('margin-top', modalOverflow ? 0 : 0 - modal.$element.height()/2)
 							.addClass('in')
 							.attr('aria-hidden', false);
 						

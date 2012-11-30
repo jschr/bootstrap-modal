@@ -62,34 +62,13 @@
 			this.$element.triggerHandler(e);
 
 			if (e.isDefaultPrevented()) return;
-			
-			if (this.options.width){
-				this.$element.css('width', this.options.width);
-				
-				var that = this;
-				this.$element.css('margin-left', function () {
-					if (/%/ig.test(that.options.width)){
-						return -(parseInt(that.options.width) / 2) + '%';
-					} else {
-						return -($(this).width() / 2) + 'px';
-					}
-				});
-			}
-		
-			var prop = this.options.height ? 'height' : 'max-height';
-
-			var value = this.options.height || this.options.maxHeight;
-			
-			if (value){
-				this.$element.find('.modal-body')
-					.css('overflow', 'auto')
-					.css(prop, value);
-			}
 
 			this.escape();
 
 			this.tab();
-			
+
+			this.resize();
+
 			this.options.loading && this.loading();
 		}, 
 		
@@ -107,6 +86,8 @@
 			this.escape();
 
 			this.tab();
+
+			this.resize();
 			
 			this.isLoading && this.loading();
 
@@ -122,6 +103,63 @@
 			$.support.transition && this.$element.hasClass('fade') ?
 				this.hideWithTransition() :
 				this.hideModal();
+		}, 
+
+		resize: function () {
+			var resizeTimeout,
+				that = this;
+
+			if (this.isShown && this.options.resize) {
+				$(window).on('resize.modal', function(){
+					resizeTimeout && clearTimeout(resizeTimeout);
+					resizeTimeout = setTimeout($.proxy(that.layout, that), 10);
+				});
+			} else if (!this.isShown) {
+				$(window).off('resize.modal');
+			}
+		},
+
+		layout: function () {
+			var prop = this.options.height ? 'height' : 'max-height',
+				value = this.options.height || this.options.maxHeight,
+				modalOverflow = $(window).height() - 10 < this.$element.height();
+
+			if (this.options.width){
+				this.$element.css('width', this.options.width);
+				
+				var that = this;
+				this.$element.css('margin-left', function () {
+					if (/%/ig.test(that.options.width)){
+						return -(parseInt(that.options.width) / 2) + '%';
+					} else {
+						return -($(this).width() / 2) + 'px';
+					}
+				});
+			} else {
+				this.$element.css('width', '');
+				this.$element.css('margin-left', '');
+			}
+		
+			
+			if (value){
+				this.$element.find('.modal-body')
+					.css('overflow', 'auto')
+					.css(prop, value);
+			} else {
+				this.$element.find('.modal-body')
+					.css('overflow', '')
+					.css(prop, '');
+			}
+
+			if (modalOverflow || this.options.modalOverflow) {
+				this.$element
+					.css('margin-top', 0)
+					.addClass('modal-overflow');
+			} else {
+				this.$element
+					.css('margin-top', 0 - this.$element.height() / 2)
+					.removeClass('modal-overflow');
+			}
 		}, 
 
 		tab: function () {
@@ -344,6 +382,7 @@
 		consumeTab: true,
 		focusOn: null,
 		replace: false,
+		resize: false,
 		attentionAnimation: 'shake',
 		manager: 'body',
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'

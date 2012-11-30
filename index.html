@@ -253,9 +253,11 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>Not That Long</h3>
   </div>
-  <div class="modal-body" style="height: 400px; overflow: hidden;">
+  <div class="modal-body">
     <button class="btn" data-toggle="modal" href="#verylong" style="position: absolute; top: 50%; right: 12px">Very Long Modal</button>
-    <img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg" />
+    <div style="height: 400px; overflow: hidden;">
+      <img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg" />
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
@@ -267,8 +269,10 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
     <h3>A Very Long</h3>
   </div>
-  <div class="modal-body" style="height: 1000px; overflow: hidden;">
-    <img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg" />
+  <div class="modal-body">
+    <div style="height: 1000px; overflow: hidden;">
+      <img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg" />
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" data-dismiss="modal" class="btn">Close</button>
@@ -284,6 +288,9 @@
 <script type="text/javascript">
 
   $(function(){
+
+    $.fn.modal.defaults.resize = true;
+
     $('[data-source]').each(function(){
       var $this = $(this),
         $source = $($this.data('source'));
