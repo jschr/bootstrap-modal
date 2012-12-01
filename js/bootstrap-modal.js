@@ -340,14 +340,14 @@
 	/* MODAL PLUGIN DEFINITION
 	* ======================= */
 
-	$.fn.modal = function (option) {
+	$.fn.modal = function (option, args) {
 		return this.each(function () {
 			var $this = $(this), 
 				data = $this.data('modal'), 
 				options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof option == 'object' && option);
 
 			if (!data) $this.data('modal', (data = new Modal(this, options)))
-			if (typeof option == 'string') data[option]()
+			if (typeof option == 'string') data[option].apply(data, [].concat(args))
 			else if (options.show) data.show()
 		})
 	}

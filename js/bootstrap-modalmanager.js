@@ -62,7 +62,8 @@
 			var that = this;
 
 			modal.$element.on('show.modalmanager', targetIsSelf(function (e) {
-				that.placeModal(modal, function(){
+
+				var showModal = function(){
 					modal.isShown = true;
 
 					var transition = $.support.transition && modal.$element.hasClass('fade');
@@ -102,7 +103,11 @@
 							modal.$element.one($.support.transition.end, complete) :
 							complete();
 					});
-				});
+				}
+
+				modal.options.replace ? 
+					that.replace(showModal) :
+					showModal();
 			}));
 
 			modal.$element.on('hidden.modalmanager', targetIsSelf(function (e) {
@@ -179,21 +184,22 @@
 			}
 		},
 
-		placeModal: function (modal, callback) {
+		replace: function (callback) {
 			var topModal;
 
 			for (var i = 0; i < this.stack.length; i++){
 				if (this.stack[i].isShown) topModal = this.stack[i];
 			}
 
-			if (topModal && modal.options.replace) {
+			if (topModal) {
 				this.$backdropHandle = topModal.$backdrop
 				topModal.$backdrop = null;
 
-				topModal.$element.one('hidden', function () { callback() });
+				callback && topModal.$element.one('hidden', 
+					targetIsSelf( $.proxy(callback, this) ));
 
 				topModal.hide();
-			} else {
+			} else if (callback) {
 				callback();
 			}
 		},
@@ -258,9 +264,9 @@
 
 				modal.$backdrop.css('z-index', getzIndex( 'backdrop', this.getIndexOfModal(modal) ))
 
-				if (doAnimate) modal.$backdrop[0].offsetWidth // force reflow
+				if (doAnimate) modal.$backdrop[0].offsetWidth; // force reflow
 
-				modal.$backdrop.addClass('in')
+				modal.$backdrop.addClass('in');
 
 				this.backdropCount += 1;
 
@@ -307,7 +313,7 @@
 
 				this.$backdropHandle = this.createBackdrop('fade');
 
-				this.$backdropHandle[0].offsetWidth // force reflow	
+				this.$backdropHandle[0].offsetWidth; // force reflow	
 
 				this.$backdropHandle
 					.css('z-index', getzIndex('backdrop', this.stack.length))
@@ -330,8 +336,6 @@
 
 			} else if (this.isLoading && this.$backdropHandle) {
 				this.$backdropHandle.removeClass('in');
-
-				if (this.$spinner) 
 
 				var that = this;
 				$.support.transition ?
@@ -387,13 +391,13 @@
 	/* MODAL MANAGER PLUGIN DEFINITION
 	* ======================= */
 
-	$.fn.modalmanager = function (option) {
+	$.fn.modalmanager = function (option, args) {
 		return this.each(function () {
 			var $this = $(this), 
 				data = $this.data('modalmanager');
 
 			if (!data) $this.data('modalmanager', (data = new ModalManager(this, option)))
-			if (typeof option === 'string') data[option]()
+			if (typeof option === 'string') data[option].apply(data, [].concat(args))
 		})
 	}
 
