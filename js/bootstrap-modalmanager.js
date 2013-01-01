@@ -71,12 +71,11 @@
 					if (transition) {
 						modal.$element[0].style.display = 'run-in'; 
 						modal.$element[0].offsetWidth;
-						modal.$element.one($.support.transition.end, function () { modal.$element[0].style.display = 'block' });
+						modal.$element.one($.support.transition.end, function () { modal.$element.show(); /*modal.$element[0].style.display = 'block' */});
 					}
 
 					modal.$element
 						.toggleClass('modal-overflow', modalOverflow)
-						.css('margin-top', modalOverflow ? 0 : 0 - modal.$element.height()/2)
 						.addClass('in')
 						.attr('aria-hidden', false);
 					

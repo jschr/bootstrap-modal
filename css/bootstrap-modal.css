@@ -36,14 +36,34 @@
 	left: 0;
 	right: 0;
 	overflow: auto;
+    text-align: center;
+}
+
+.modal-scrollable .modal {
+    text-align: left;
+}
+
+.modal-scrollable:after {
+    content: "";
+    height: 100%;
+    width: 0;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .modal {
 	outline: none;
-	position: absolute;
-	margin-top: 0;
-	top: 50%;
+	position: relative;
+	margin: 0;
+    width: auto;
+	top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
 	overflow: visible; /* allow content to popup out (i.e tooltips) */
+    display: inline-block;
+    vertical-align: middle;
+    min-width: 530px;
 }
 
 .modal.fade {
@@ -55,7 +75,7 @@
 }
 
 .modal.fade.in {
-	top: 50%;
+	top: 0;
 }
 
 .modal-body {
@@ -91,8 +111,7 @@
 }
 
 .modal.container {
-  width: 940px;
-  margin-left: -470px;
+	max-width: 940px;
 }
 
 /* Modal Overflow */
@@ -118,8 +137,7 @@
 
 @media (min-width: 1200px) {
 	.modal.container {
-		width: 1170px;
-		margin-left: -585px;
+		max-width: 1170px;
 	}
 }
 
