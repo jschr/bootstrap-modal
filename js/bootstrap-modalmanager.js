@@ -69,9 +69,8 @@
 					modal.$element.show();
 
 					if (transition) {
-						modal.$element[0].style.display = 'run-in'; 
 						modal.$element[0].offsetWidth;
-						modal.$element.one($.support.transition.end, function () { modal.$element.show(); /*modal.$element[0].style.display = 'block' */});
+						modal.$element.one($.support.transition.end, function () { modal.$element.show(); });
 					}
 
 					modal.$element
