@@ -62,6 +62,9 @@ Used to enable tabindexing for modals with `data-tabindex`. This is set to true 
 + **focusOn**
 The element or selector to set the focus to once the modal is shown.
 
++ **replace**
+If set to true, the modal will replace the topmost modal when opened.
+
 + **attentionAnimation**
 Set the animation used by the `attention` method. Any animation in [animate.css](http://daneden.me/animate/) is supported but only the *shake* animation is included by default.
 
