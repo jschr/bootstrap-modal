@@ -148,11 +148,10 @@
 			var that = this;
 
 			if (this.isShown && this.options.consumeTab) {
-
 				this.$element.on('keydown.tabindex.modal', '[data-tabindex]', function (e) {
 			    	if (e.keyCode && e.keyCode == 9){
-				        var $next = $(this),
-				        	$rollover = $(this);
+						var $next = $(this),
+							$rollover = $(this);
 
 				       	that.$element.find('[data-tabindex]:enabled:not([readonly])').each(function (e) {
 			         		if (!e.shiftKey){
@@ -165,10 +164,11 @@
 				             		$rollover = $(this);
 				          	}
 				        });
-						
+
 				        $next[0] !== $(this)[0] ?
 			          		$next.focus() : $rollover.focus();
-
+							
+						e.preventDefault();
 			      	}
 			    });
 			} else if (!this.isShown) {
