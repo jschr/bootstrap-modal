@@ -356,8 +356,8 @@
 				var $baseModal = $('<div class="modal hide" />').appendTo('body'),
 					$baseBackdrop = $('<div class="modal-backdrop hide" />').appendTo('body');
 
-				baseIndex['modal'] = +$baseModal.css('z-index'),
-				baseIndex['backdrop'] = +$baseBackdrop.css('z-index'),
+				baseIndex['modal'] = +$baseModal.css('z-index');
+				baseIndex['backdrop'] = +$baseBackdrop.css('z-index');
 				zIndexFactor = baseIndex['modal'] - baseIndex['backdrop'];
 
 				$baseModal.remove();
