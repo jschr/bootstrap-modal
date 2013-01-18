@@ -26,7 +26,7 @@
 
 	var Modal = function (element, options) {
 		this.init(element, options);
-	}
+	};
 
 	Modal.prototype = {
 
@@ -54,8 +54,7 @@
 		},
 
 		show: function () {
-			var that = this,
-				e = $.Event('show');
+			var e = $.Event('show');
 
 			if (this.isShown) return;
 
@@ -153,24 +152,24 @@
 						var $next = $(this),
 							$rollover = $(this);
 
-				       	that.$element.find('[data-tabindex]:enabled:not([readonly])').each(function (e) {
-			         		if (!e.shiftKey){
-			           	 		$next = $next.data('tabindex') < $(this).data('tabindex') ?
-				              		$next = $(this) :
-				              		$rollover = $(this);
-				          	} else {
-				            	$next = $next.data('tabindex') > $(this).data('tabindex') ?
-				              		$next = $(this) :
-				             		$rollover = $(this);
-				          	}
-				        });
+						that.$element.find('[data-tabindex]:enabled:not([readonly])').each(function (e) {
+							if (!e.shiftKey){
+						 		$next = $next.data('tabindex') < $(this).data('tabindex') ?
+									$next = $(this) :
+									$rollover = $(this);
+							} else {
+								$next = $next.data('tabindex') > $(this).data('tabindex') ?
+									$next = $(this) :
+									$rollover = $(this);
+							}
+						});
 
-				        $next[0] !== $(this)[0] ?
-			          		$next.focus() : $rollover.focus();
-							
+						$next[0] !== $(this)[0] ?
+							$next.focus() : $rollover.focus();
+
 						e.preventDefault();
-			      	}
-			    });
+					}
+				});
 			} else if (!this.isShown) {
 				this.$element.off('keydown.tabindex.modal');
 			}
@@ -192,13 +191,13 @@
 		hideWithTransition: function () {
 			var that = this
 				, timeout = setTimeout(function () {
-					that.$element.off($.support.transition.end)
-					that.hideModal()
+					that.$element.off($.support.transition.end);
+					that.hideModal();
 				}, 500);
 
 			this.$element.one($.support.transition.end, function () {
-				clearTimeout(timeout)
-				that.hideModal()
+				clearTimeout(timeout);
+				that.hideModal();
 			});
 		},
 
@@ -236,9 +235,9 @@
 					.append(this.options.spinner)
 					.appendTo(this.$element);
 
-				if (doAnimate) this.$loading[0].offsetWidth // force reflow
+				if (doAnimate) this.$loading[0].offsetWidth; // force reflow
 
-				this.$loading.addClass('in')
+				this.$loading.addClass('in');
 
 				this.isLoading = true;
 
@@ -314,7 +313,7 @@
 				.removeClass('in')
 				.attr('aria-hidden', true);
 		}
-	}
+	};
 
 
 	/* MODAL PLUGIN DEFINITION
@@ -326,11 +325,11 @@
 				data = $this.data('modal'),
 				options = $.extend({}, $.fn.modal.defaults, $this.data(), typeof option == 'object' && option);
 
-			if (!data) $this.data('modal', (data = new Modal(this, options)))
-			if (typeof option == 'string') data[option].apply(data, [].concat(args))
+			if (!data) $this.data('modal', (data = new Modal(this, options)));
+			if (typeof option == 'string') data[option].apply(data, [].concat(args));
 			else if (options.show) data.show()
 		})
-	}
+	};
 
 	$.fn.modal.defaults = {
 		keyboard: true,
@@ -348,9 +347,9 @@
 		attentionAnimation: 'shake',
 		manager: 'body',
 		spinner: '<div class="loading-spinner" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
-	}
+	};
 
-	$.fn.modal.Constructor = Modal
+	$.fn.modal.Constructor = Modal;
 
 
 	/* MODAL DATA-API
