@@ -54,8 +54,7 @@
 		},
 
 		show: function () {
-			var that = this,
-				e = $.Event('show');
+			var e = $.Event('show');
 
 			if (this.isShown) return;
 
