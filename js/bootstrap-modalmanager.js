@@ -396,7 +396,7 @@
 			var $this = $(this),
 				data = $this.data('modalmanager');
 
-			if (!data) $this.data('modalmanager', (data = new ModalManager(this, option)))
+			if (!data) $this.data('modalmanager', (data = new ModalManager(this, option)));
 			if (typeof option === 'string') data[option].apply(data, [].concat(args))
 		})
 	};
