@@ -93,9 +93,11 @@
 							modal.$element.triggerHandler('shown');
 						};
 
-						transition ?
-							modal.$element.one($.support.transition.end, complete) :
+						if (transition && modal.$element.is('hidden')) {
+							modal.$element.one($.support.transition.end, complete);
+						} else {
 							complete();
+						}
 					});
 				};
 
