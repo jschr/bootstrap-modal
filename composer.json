@@ -1,0 +1,14 @@
+{
+	"name":        "jschr/bootstrap-modal",
+	"description": "Extends the default Bootstrap Modal class. Responsive, stackable, ajax and more.",
+	"keywords":    ["bootstrap", "modal", "javascript"],
+	"homepage":    "https://github.com/jschr/bootstrap-modal.git",
+	"license":     "Apache License 2.0",
+	"authors":     [
+		{
+			"name":     "Jordan Schroter",
+			"homepage": "https://twitter.com/_jschr",
+			"role":     "Developer"
+		}
+	]
+}
