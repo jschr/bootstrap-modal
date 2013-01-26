@@ -1,13 +1,13 @@
 {
-	"name":        "adam-lynch/bootstrap-modal-test",
+	"name":        "jschr/bootstrap-modal",
 	"description": "Extends the default Bootstrap Modal class. Responsive, stackable, ajax and more.",
 	"keywords":    ["bootstrap", "modal", "javascript"],
-	"homepage":    "https://github.com/adam-lynch/bootstrap-modal/tree/packagist",
+	"homepage":    "https://github.com/jschr/bootstrap-modal.git",
 	"license":     "Apache License 2.0",
 	"authors":     [
 		{
-			"name":     "Adam Lynch",
-			"homepage": "https://twitter.com/lynchy010",
+			"name":     "Jordan Schroter",
+			"homepage": "https://twitter.com/_jschr",
 			"role":     "Developer"
 		}
 	]
