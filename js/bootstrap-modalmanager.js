@@ -61,7 +61,7 @@
 
 			var that = this;
 
-			modal.$element.on('show.modal.modalmanager', targetIsSelf(function (e) {
+			modal.$element.on('show.modalmanager', targetIsSelf(function (e) {
 
 				var showModal = function(){
 					modal.isShown = true;
@@ -96,7 +96,7 @@
 
 						var complete = function () {
 							that.setFocus();
-							modal.$element.triggerHandler('shown.modal');
+							modal.$element.triggerHandler('shown');
 						};
 
 						transition ?
@@ -110,7 +110,7 @@
 					showModal();
 			}));
 
-			modal.$element.on('hidden.modal.modalmanager', targetIsSelf(function (e) {
+			modal.$element.on('hidden.modalmanager', targetIsSelf(function (e) {
 
 				that.backdrop(modal);
 
@@ -124,7 +124,7 @@
 
 			}));
 
-			modal.$element.on('destroy.modal.modalmanager', targetIsSelf(function (e) {
+			modal.$element.on('destroy.modalmanager', targetIsSelf(function (e) {
 				that.removeModal(modal);
 			}));
 
@@ -326,7 +326,7 @@
 
 				this.$spinner = $(this.createContainer())
 					.append($spinner)
-					.on('click.modal.modalmanager', $.proxy(this.loading, this));
+					.on('click.modalmanager', $.proxy(this.loading, this));
 
 				this.isLoading = true;
 
