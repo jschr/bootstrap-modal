@@ -54,7 +54,7 @@
 		},
 
 		show: function () {
-			var e = $.Event('show');
+			var e = $.Event('show.modal');
 
 			if (this.isShown) return;
 
@@ -72,7 +72,7 @@
 		hide: function (e) {
 			e && e.preventDefault();
 
-			e = $.Event('hide');
+			e = $.Event('hide.modal');
 
 			this.$element.triggerHandler(e);
 
@@ -204,7 +204,7 @@
 		hideModal: function () {
 			this.$element
 				.hide()
-				.triggerHandler('hidden');
+				.triggerHandler('hidden.modal');
 
 			var prop = this.options.height ? 'height' : 'max-height';
 			var value = this.options.height || this.options.maxHeight;
@@ -289,7 +289,7 @@
 
 
 		destroy: function () {
-			var e = $.Event('destroy');
+			var e = $.Event('destroy.modal');
 			this.$element.triggerHandler(e);
 			if (e.isDefaultPrevented()) return;
 
@@ -365,7 +365,7 @@
 			e.preventDefault();
 			$target
 				.modal(option)
-				.one('hide', function () {
+				.one('hide.modal', function () {
 					$this.focus();
 				})
 		});
