@@ -121,7 +121,7 @@
 			}
 
 			if (value){
-				if (typeof value == 'function') value = $.proxy(value,this);
+				if (typeof value == 'function') value = $.proxy(value,this)();
 				if (value == 'auto') value = $(window).height() - 165 ;
 
 				this.$element.find('.modal-body')
