@@ -58,7 +58,7 @@
 
 			if (this.isShown) return;
 
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 
 			if (e.isDefaultPrevented()) return;
 
@@ -74,7 +74,7 @@
 
 			e = $.Event('hide');
 
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 
 			if (!this.isShown || e.isDefaultPrevented()) return (this.isShown = false);
 
@@ -204,7 +204,7 @@
 		hideModal: function () {
 			this.$element
 				.hide()
-				.triggerHandler('hidden');
+				.trigger('hidden');
 
 			var prop = this.options.height ? 'height' : 'max-height';
 			var value = this.options.height || this.options.maxHeight;
@@ -290,7 +290,7 @@
 
 		destroy: function () {
 			var e = $.Event('destroy');
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 			if (e.isDefaultPrevented()) return;
 
 			this.teardown();
