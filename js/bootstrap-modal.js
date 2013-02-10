@@ -120,14 +120,17 @@
 				this.$element.css('margin-left', '');
 			}
 
-			if (typeof value == 'function') value = $.proxy(value,this)();
-			if (value == 'auto') value = $(window).height() - 165 ;
-
 			this.$element.find('.modal-body')
-				.css('overflow', (value && 'auto') || '')
-				.css(prop, value || '');
+				.css('overflow', '')
+				.css(prop, '');
 
 			var modalOverflow = $(window).height() - 10 < this.$element.height();
+
+			if (value){
+				this.$element.find('.modal-body')
+					.css('overflow', 'auto')
+					.css(prop, value);
+			}
 
 			if (modalOverflow || this.options.modalOverflow) {
 				this.$element
