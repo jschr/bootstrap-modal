@@ -141,6 +141,10 @@
 					.css('margin-top', 0 - this.$element.height() / 2)
 					.removeClass('modal-overflow');
 			}
+      
+			this.$element.data('height',this.$element.height())
+			this.$element.data('width',this.$element.width())
+      
 		},
 
 		tab: function () {

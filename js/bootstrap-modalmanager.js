@@ -49,6 +49,14 @@
 						}
 					}, 10);
 				});
+				// listen to any input 'change' event to check modal-size changed and fire 'resize.modal'. 
+				$(document).on('change.modal','.modal.modal-reposition',function(e){
+					var $target = $(e.target)
+						, wait = $target.data('repositionwait') || that.options.repositionWait || 300
+					if ($target.height()!=$target.data('height') || $target.width()!=$target.data('width')){
+						setTimeout(function(){$(window).trigger('resize.modal')},wait);
+					}
+				});
 			}
 		},
 
