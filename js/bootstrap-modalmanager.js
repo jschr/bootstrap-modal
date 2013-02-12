@@ -49,12 +49,17 @@
 						}
 					}, 10);
 				});
-				// listen to any input 'change' event to check modal-size changed and fire 'resize.modal'. 
+				// listen to 'change' event, checking if modal-size changed and call 'layout'. 
 				$(document).on('change.modal','.modal.modal-reposition',function(e){
-					var $target = $(e.target)
-						, wait = $target.data('repositionwait') || that.options.repositionWait || 300
-					if ($target.height()!=$target.data('height') || $target.width()!=$target.data('width')){
-						setTimeout(function(){$(window).trigger('resize.modal')},wait);
+					var $target = $(e.currentTarget)
+						, modal = $target.data('modal');
+					if (modal && modal.isShown){
+						setTimeout(
+							function(){
+								if ($target.height()!=$target.data('height') || $target.width()!=$target.data('width'))
+									modal.layout()
+              }
+							,$target.data('repositionwait') || that.options.repositionWait || 300);
 					}
 				});
 			}
