@@ -109,7 +109,7 @@
 
 						var complete = function () {
 							that.setFocus();
-							modal.$element.triggerHandler('shown');
+							modal.$element.trigger('shown');
 						};
 
 						transition ?

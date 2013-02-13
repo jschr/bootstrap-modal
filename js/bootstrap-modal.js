@@ -58,7 +58,7 @@
 
 			if (this.isShown) return;
 
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 
 			if (e.isDefaultPrevented()) return;
 
@@ -74,7 +74,7 @@
 
 			e = $.Event('hide');
 
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 
 			if (!this.isShown || e.isDefaultPrevented()) return (this.isShown = false);
 
@@ -208,7 +208,7 @@
 		hideModal: function () {
 			this.$element
 				.hide()
-				.triggerHandler('hidden');
+				.trigger('hidden');
 
 			var prop = this.options.height ? 'height' : 'max-height';
 			var value = this.options.height || this.options.maxHeight;
@@ -294,7 +294,7 @@
 
 		destroy: function () {
 			var e = $.Event('destroy');
-			this.$element.triggerHandler(e);
+			this.$element.trigger(e);
 			if (e.isDefaultPrevented()) return;
 
 			this.teardown();
@@ -360,7 +360,7 @@
 	* ============== */
 
 	$(function () {
-		$(document).off('.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
+		$(document).off('click.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
 			var $this = $(this),
 				href = $this.attr('href'),
 				$target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))), //strip for ie7
