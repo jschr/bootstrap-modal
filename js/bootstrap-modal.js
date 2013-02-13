@@ -104,6 +104,11 @@
 			var prop = this.options.height ? 'height' : 'max-height',
 				value = this.options.height || this.options.maxHeight;
 
+			if (!value && this.$element.hasClass('modal-fit')){
+				value = function(){return $(window).height() - 165}
+				prop = 'max-height';
+			}
+
 			if (this.options.width){
 				this.$element.css('width', this.options.width);
 
@@ -126,7 +131,7 @@
 
 			var modalOverflow = $(window).height() - 10 < this.$element.height();
 
-			if (value){
+			if (value && !this.$element.hasClass('modal-flow')){
 				this.$element.find('.modal-body')
 					.css('overflow', 'auto')
 					.css(prop, value);
@@ -360,7 +365,7 @@
 	* ============== */
 
 	$(function () {
-		$(document).off('.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
+		$(document).off('click.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
 			var $this = $(this),
 				href = $this.attr('href'),
 				$target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))), //strip for ie7
