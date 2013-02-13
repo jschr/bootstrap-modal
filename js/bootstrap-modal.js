@@ -127,7 +127,8 @@
 
 			this.$element.find('.modal-body')
 				.css('overflow', '')
-				.css(prop, '');
+				.css('max-height', '')
+				.css('height', '');
 
 			var modalOverflow = $(window).height() - 10 < this.$element.height();
 
@@ -147,8 +148,8 @@
 					.removeClass('modal-overflow');
 			}
       
-			this.$element.data('height',this.$element.height())
-			this.$element.data('width',this.$element.width())
+			this.$element.data('modalheight',this.$element.height())
+			this.$element.data('modalwidth',this.$element.width())
       
 		},
 
@@ -365,11 +366,17 @@
 	* ============== */
 
 	$(function () {
-		$(document).off('click.modal').on('click.modal.data-api', '[data-toggle="modal"]', function ( e ) {
+		$(document).off('click.modal').on('click.modal.data-api', '[data-toggle|="modal"]', function ( e ) {
 			var $this = $(this),
+				toggle = $this.attr('data-toggle'),
 				href = $this.attr('href'),
 				$target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))), //strip for ie7
 				option = $target.data('modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data());
+
+			if (toggle!='modal'){
+				if ($target.data('modal')) option = $target.data('modal').isShown? 'layout':'show';
+				$target.toggleClass(toggle);
+			}
 
 			e.preventDefault();
 			$target

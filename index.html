@@ -116,7 +116,17 @@
           </div>
           <br />
 
-		    </div>
+          <div class="reposition">
+  				  <h3>Fit, flow & Reposition</h3>
+  				  <pre class="pre-scrollable prettyprint linenums" data-source="#reposition">
+  				  </pre>
+  				  <div class="text-center">
+  					<button class="demo btn btn-primary btn-large" data-toggle="modal" href="#reposition">View Demo</button>
+  				  </div>
+  				</div>
+  				<br />
+
+          </div>
 	    </div>
 	  </div>
 		
@@ -280,6 +290,27 @@
 </div>
 
 <div id="ajax-modal" class="modal hide fade" tabindex="-1"></div>
+
+<div id="reposition" class="modal hide fade modal-fit modal-reposition" tabindex="-1">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Fit, flow & reposition</h3>
+  </div>
+  <div class="modal-body">
+    <div>
+      <button class="btn" data-toggle="collapse" data-target="#showimg" onclick="$('#reposition').trigger('change.modal')">Click me</button>
+      <button class="btn" data-toggle="modal-fit" data-target="#reposition">Fit or flow</button>
+    </div>
+    <div id="showimg" class="collapse">
+      <img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+    <button type="button" data-dismiss="modal" class="btn btn-primary">Continue Task</button>
+  </div>
+</div>
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
