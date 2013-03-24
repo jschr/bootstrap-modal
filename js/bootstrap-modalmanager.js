@@ -179,9 +179,14 @@
 		},
 
 		getIndexOfModal: function (modal) {
-			for (var i = 0; i < this.stack.length; i++){
-				if (modal === this.stack[i]) return i;
-			}
+			var index=0;
+            for (var i = 0; i < this.stack.length; i++){
+                if(this.stack[i].isShown) {
+                    index++;
+                }
+            }
+        
+            return index;   
 		},
 
 		replace: function (callback) {
