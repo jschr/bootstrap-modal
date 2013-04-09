@@ -222,7 +222,7 @@
 				this.isLoading && this.removeSpinner();
 			}
 
-			return $backdrop
+			return $backdrop;
 		},
 
 		removeContainer: function (modal) {
