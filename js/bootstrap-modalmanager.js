@@ -35,6 +35,7 @@
 			this.$element = $(element);
 			this.options = $.extend({}, $.fn.modalmanager.defaults, this.$element.data(), typeof options == 'object' && options);
 			this.stack = [];
+			this.index = 0;
 			this.backdropCount = 0;
 
 			if (this.options.resize) {
@@ -57,6 +58,7 @@
 		},
 
 		appendModal: function (modal) {
+			var scope = this;
 			this.stack.push(modal);
 
 			var that = this;
@@ -65,6 +67,7 @@
 
 				var showModal = function(){
 					modal.isShown = true;
+					modal.index = scope.index++;
 
 					var transition = $.support.transition && modal.$element.hasClass('fade');
 
@@ -133,6 +136,7 @@
 		destroyModal: function (modal) {
 
 			modal.destroy();
+			this.index--;
 
 			var hasOpenModal = this.hasOpenModal();
 
@@ -179,9 +183,7 @@
 		},
 
 		getIndexOfModal: function (modal) {
-			for (var i = 0; i < this.stack.length; i++){
-				if (modal === this.stack[i]) return i;
-			}
+			return modal.index;
 		},
 
 		replace: function (callback) {
