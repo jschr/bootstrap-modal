@@ -124,14 +124,14 @@
 				.css('overflow', '')
 				.css(prop, '');
 
-			var modalOverflow = $(window).height() - 10 < this.$element.height();
-
 			if (value){
 				this.$element.find('.modal-body')
 					.css('overflow', 'auto')
 					.css(prop, value);
 			}
 
+			var modalOverflow = $(window).height() - 10 < this.$element.height();
+            
 			if (modalOverflow || this.options.modalOverflow) {
 				this.$element
 					.css('margin-top', 0)
