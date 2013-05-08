@@ -202,20 +202,19 @@
 		},
 
 		hideModal: function () {
-			this.$element
-				.hide()
-				.trigger('hidden');
+            var prop = this.options.height ? 'height' : 'max-height';
+            var value = this.options.height || this.options.maxHeight;
 
-			var prop = this.options.height ? 'height' : 'max-height';
-			var value = this.options.height || this.options.maxHeight;
+            if (value){
+                this.$element.find('.modal-body')
+                    .css('overflow', '')
+                    .css(prop, '');
+            }
 
-			if (value){
-				this.$element.find('.modal-body')
-					.css('overflow', '')
-					.css(prop, '');
-			}
-
-		},
+            this.$element
+                .hide()
+                .trigger('hidden');
+        },
 
 		removeLoading: function () {
 			this.$loading.remove();
