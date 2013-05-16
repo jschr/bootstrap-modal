@@ -216,10 +216,14 @@
 				.trigger('hidden');
 		},
 
-		removeLoading: function () {
+		removeLoading: function (callback) {
+			callback = callback || function () {};
+			
 			this.$loading.remove();
 			this.$loading = null;
 			this.isLoading = false;
+			
+			callback();
 		},
 
 		loading: function (callback) {
@@ -249,8 +253,8 @@
 
 				var that = this;
 				$.support.transition && this.$element.hasClass('fade')?
-					this.$loading.one($.support.transition.end, function () { that.removeLoading() }) :
-					that.removeLoading();
+					this.$loading.one($.support.transition.end, function () { that.removeLoading(callback) }) :
+					that.removeLoading(callback);
 
 			} else if (callback) {
 				callback(this.isLoading);
