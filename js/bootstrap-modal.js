@@ -69,10 +69,17 @@
 			this.options.loading && this.loading();
 		},
 
-		hide: function (e) {
-			e && e.preventDefault();
+		hide: function (obj) {
+			var result;
+			if (obj){
+				if (obj instanceof $.Event || obj.preventDefault){
+					obj.preventDefault();
+				} else {
+					result = { modalResult: obj };
+				}
+			}
 
-			e = $.Event('hide');
+			var e = $.Event('hide', result);
 
 			this.$element.trigger(e);
 
@@ -96,8 +103,8 @@
 				.attr('aria-hidden', true);
 
 			$.support.transition && this.$element.hasClass('fade') ?
-				this.hideWithTransition() :
-				this.hideModal();
+				this.hideWithTransition(result) :
+				this.hideModal(result);
 		},
 
 		layout: function () {
@@ -188,7 +195,7 @@
 			}
 		},
 
-		hideWithTransition: function () {
+		hideWithTransition: function (result) {
 			var that = this
 				, timeout = setTimeout(function () {
 					that.$element.off($.support.transition.end);
@@ -197,11 +204,11 @@
 
 			this.$element.one($.support.transition.end, function () {
 				clearTimeout(timeout);
-				that.hideModal();
+				that.hideModal(result);
 			});
 		},
 
-		hideModal: function () {
+		hideModal: function (result) {
 			var prop = this.options.height ? 'height' : 'max-height';
 			var value = this.options.height || this.options.maxHeight;
 
@@ -213,7 +220,7 @@
 
 			this.$element
 				.hide()
-				.trigger('hidden');
+				.trigger($.Event('hidden', result));
 		},
 
 		removeLoading: function () {
