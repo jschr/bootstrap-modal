@@ -152,7 +152,7 @@
 						var elements = [],
 							tabindex = Number($(this).data('tabindex'));
 
-						that.$element.find('[data-tabindex]:enabled:not([readonly])').each(function (ev) {
+						that.$element.find('[data-tabindex]:enabled:visible:not([readonly])').each(function (ev) {
 							elements.push(Number($(this).data('tabindex')));
 						});
 						elements.sort(function(a,b){return a-b});
