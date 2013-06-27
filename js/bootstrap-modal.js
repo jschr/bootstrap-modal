@@ -333,6 +333,7 @@
 	$.fn.modal.defaults = {
 		keyboard: true,
 		backdrop: true,
+		backdropClass: null,
 		loading: false,
 		show: true,
 		width: null,

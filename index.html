@@ -116,6 +116,17 @@
           </div>
           <br />
 
+          <div class="custom-backdrop" style="position: relative; overflow: hidden">
+            <h3>Modal with custom CSS Class on Backdrop</h3>
+            <pre class="pre-scrollable prettyprint linenums" data-source="#custom-backdrop">
+            </pre>
+            <div class="text-center">
+            <button class="demo btn btn-primary btn-large" data-toggle="modal" href="#custom-backdrop">View Demo</button>
+            </div>
+          </div>
+          <br />
+
+
 		    </div>
 	    </div>
 	  </div>
@@ -247,6 +258,22 @@
     <button type="button" data-dismiss="modal" class="btn">Close</button>
   </div>
 </div>
+
+<div id="custom-backdrop" class="modal hide fade" tabindex="-1" data-backdrop="static" data-keyboard="false" data-backdrop-class="custom-backdrop">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>A Custom CSS Backdrop Modal</h3>
+  </div>
+  <div class="modal-body">
+    <button class="btn" data-toggle="modal" href="#custom-backdrop" style="position: absolute; top: 50%; right: 12px">Custom backdrop</button>
+    <img style="height: 800px" src="http://i.imgur.com/KwPYo.jpg" />
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+  </div>
+</div>
+
+
 
 <div id="notlong" class="modal hide fade" tabindex="-1" data-replace="true">
   <div class="modal-header">

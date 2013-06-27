@@ -34,6 +34,7 @@
 		init: function (element, options) {
 			this.$element = $(element);
 			this.options = $.extend({}, $.fn.modalmanager.defaults, this.$element.data(), typeof options == 'object' && options);
+			console.log(this.options);
 			this.stack = [];
 			this.backdropCount = 0;
 
@@ -261,6 +262,8 @@
 				var doAnimate = $.support.transition && animate && !this.$backdropHandle;
 
 				modal.$backdrop = this.createBackdrop(animate);
+
+				if (modal.options.backdropClass) modal.$backdrop.addClass(modal.options.backdropClass);
 
 				modal.$backdrop.css('z-index', getzIndex( 'backdrop', this.getIndexOfModal(modal) ));
 
