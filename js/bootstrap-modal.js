@@ -119,6 +119,8 @@
 				this.$element.css('width', '');
 				this.$element.css('margin-left', '');
 			}
+			
+			var scrollTop = this.$element.find('.modal-body').scrollTop();
 
 			this.$element.find('.modal-body')
 				.css('overflow', '')
@@ -129,6 +131,8 @@
 					.css('overflow', 'auto')
 					.css(prop, value);
 			}
+			
+			this.$element.find('.modal-body').scrollTop(scrollTop);
 
 			var modalOverflow = $(window).height() - 10 < this.$element.height();
             
