@@ -11,6 +11,21 @@ A single ModalManager is created by default on body and can be accessed through 
 
 Bootstrap-Modal can be used as a replacement for Bootstrap's Modal class or as a patch to the library.
 
+
+Bootstrap 3
+-----------
+
+If you're using BS3, I've provided a compatible css patch. Include `bootstrap-modal-bs3patch.css` **before** the main `bootstrap-modal.css` file to use this plugin with Bootstrap 3.
+
+If you're using the loading spinner functionality you may also need to change the default template to be compatible in js:
+
+    $.fn.modal.defaults.spinner = $.fn.modalmanager.defaults.spinner = 
+        '<div class="loading-spinner" style="width: 200px; margin-left: -100px;">' +
+        '<div class="progress progress-striped active">' +
+            '<div class="progress-bar" style="width: 100%;"></div>' +
+        '</div>' +
+    '</div>';
+
 Overview
 -----------
 
