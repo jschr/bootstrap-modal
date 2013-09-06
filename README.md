@@ -35,6 +35,7 @@ Overview
 + Full width
 + Load content via AJAX
 + Disable background scrolling
++ Customize backdrop
 
 Installation 
 -----------
@@ -142,7 +143,13 @@ You can use `data-tabindex` instead of the default `tabindex` to specify the tab
 See the stackable example on the [demo](http://jschr.github.com/bootstrap-modal/) page for an example.
 
 
-	
+Add your own CSS class to the backdrop
+-----------
+You can use `data-custom-class` to specify a css class assigned to the backdrop for your modal.
+
+    <div data-backdrop-class="custom-backdrop" />
+
+See the Custom CSS Backdrop Modal example on the [demo](http://jschr.github.com/bootstrap-modal/#custom-backdrop) page for an example.
 
 
 

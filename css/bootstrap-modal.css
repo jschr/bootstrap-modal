@@ -82,6 +82,12 @@
 	z-index: 940;
 }
 
+.custom-backdrop.modal-backdrop.fade.in {
+	background: #EA2A6E;
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
 .modal-backdrop, 
 .modal-backdrop.fade.in{
 	opacity: 0.7;
