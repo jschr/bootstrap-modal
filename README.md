@@ -1,4 +1,4 @@
-Bootstrap Modal v2.1
+Bootstrap Modal v2.2.0
 =============
 
 See live demo [here](http://jschr.github.com/bootstrap-modal/).
@@ -71,6 +71,9 @@ Toggle the loading state.
 + **spinner**
 Provide a custom image or animation for the loading spinner.
 
++ **backdropTemplate**
+Provide a custom modal backdrop.
+
 + **consumeTab**
 Used to enable tabindexing for modals with `data-tabindex`. This is set to true by default.
 
@@ -99,6 +102,9 @@ Limit the amount of backdrops that will appear on the page at the same time.
 
 + **spinner**
 Provide a custom image or animation for the loading spinner.
+
++ **backdropTemplate**
+Provide a custom modalmanager backdrop. This backdrop is used when `$element.modalmanager('loading')` is called.
 
 Disable Background Scrolling
 -----------
