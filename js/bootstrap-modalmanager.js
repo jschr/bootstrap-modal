@@ -147,12 +147,17 @@
 			this.setFocus();
 		},
 
-		hasOpenModal: function () {
+		getOpenModals: function () {
+			var openModals = [];
 			for (var i = 0; i < this.stack.length; i++){
-				if (this.stack[i].isShown) return true;
+				if (this.stack[i].isShown) openModals.push(this.stack[i]);
 			}
 
-			return false;
+			return openModals;
+		},
+
+		hasOpenModal: function () {
+			return this.getOpenModals().length > 0;
 		},
 
 		setFocus: function () {
@@ -235,8 +240,7 @@
 			var $container;
 
 			$container = $('<div class="modal-scrollable">')
-				.css('z-index', getzIndex( 'modal',
-					modal ? this.getIndexOfModal(modal) : this.stack.length ))
+				.css('z-index', getzIndex('modal', this.getOpenModals().length))
 				.appendTo(this.$element);
 
 			if (modal && modal.options.backdrop != 'static') {
@@ -263,7 +267,7 @@
 
 				modal.$backdrop = this.createBackdrop(animate, modal.options.backdropTemplate);
 
-				modal.$backdrop.css('z-index', getzIndex( 'backdrop', this.getIndexOfModal(modal) ));
+				modal.$backdrop.css('z-index', getzIndex( 'backdrop', this.getOpenModals().length ));
 
 				if (doAnimate) modal.$backdrop[0].offsetWidth; // force reflow
 
@@ -316,12 +320,14 @@
 
 				this.$backdropHandle[0].offsetWidth; // force reflow
 
+				var openModals = this.getOpenModals();
+
 				this.$backdropHandle
-					.css('z-index', getzIndex('backdrop', this.stack.length))
+					.css('z-index', getzIndex('backdrop', openModals.length + 1))
 					.addClass('in');
 
 				var $spinner = $(this.options.spinner)
-					.css('z-index', getzIndex('modal', this.stack.length))
+					.css('z-index', getzIndex('modal', openModals.length + 1))
 					.appendTo(this.$element)
 					.addClass('in');
 
