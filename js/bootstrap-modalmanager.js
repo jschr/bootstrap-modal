@@ -209,11 +209,12 @@
 			modal.$backdrop = null;
 		},
 
-		createBackdrop: function (animate) {
+		createBackdrop: function (animate, tmpl) {
 			var $backdrop;
 
 			if (!this.$backdropHandle) {
-				$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+				$backdrop = $(tmpl)
+					.addClass(animate)
 					.appendTo(this.$element);
 			} else {
 				$backdrop = this.$backdropHandle;
@@ -260,7 +261,7 @@
 			if (modal.isShown && showBackdrop) {
 				var doAnimate = $.support.transition && animate && !this.$backdropHandle;
 
-				modal.$backdrop = this.createBackdrop(animate);
+				modal.$backdrop = this.createBackdrop(animate, modal.options.backdropTemplate);
 
 				modal.$backdrop.css('z-index', getzIndex( 'backdrop', this.getIndexOfModal(modal) ));
 
@@ -311,7 +312,7 @@
 
 			if (!this.isLoading) {
 
-				this.$backdropHandle = this.createBackdrop('fade');
+				this.$backdropHandle = this.createBackdrop('fade', this.options.backdropTemplate);
 
 				this.$backdropHandle[0].offsetWidth; // force reflow
 
@@ -404,7 +405,8 @@
 	$.fn.modalmanager.defaults = {
 		backdropLimit: 999,
 		resize: true,
-		spinner: '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>'
+		spinner: '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>',
+		backdropTemplate: '<div class="modal-backdrop" />'
 	};
 
 	$.fn.modalmanager.Constructor = ModalManager
