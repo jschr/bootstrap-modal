@@ -79,7 +79,6 @@
 					modal.$element.appendTo(modal.$container);
 
 					that.backdrop(modal, function () {
-
 						modal.$element.show();
 
 						if (transition) {       
@@ -113,8 +112,12 @@
 			modal.$element.on('hidden.modalmanager', targetIsSelf(function (e) {
 
 				that.backdrop(modal);
-
 				if (modal.$backdrop){
+					var transition = $.support.transition && modal.$element.hasClass('fade');
+
+					// trigger a relayout due to firebox's buggy transition end event 
+					if (transition) { modal.$element[0].offsetWidth; }
+
 					$.support.transition && modal.$element.hasClass('fade') ?
 						modal.$backdrop.one($.support.transition.end, function () { that.destroyModal(modal) }) :
 						that.destroyModal(modal);
@@ -131,7 +134,6 @@
 		},
 
 		destroyModal: function (modal) {
-
 			modal.destroy();
 
 			var hasOpenModal = this.hasOpenModal();
