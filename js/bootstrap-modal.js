@@ -89,7 +89,7 @@
 
 			this.tab();
 
-			this.isLoading && this.loading();
+			this.removeLoading();
 
 			$(document).off('focusin.modal');
 
@@ -222,7 +222,7 @@
 		},
 
 		removeLoading: function () {
-			this.$loading.remove();
+      this.$loading && this.$loading.remove();
 			this.$loading = null;
 			this.isLoading = false;
 		},
