@@ -221,10 +221,13 @@
 				.trigger('hidden');
 		},
 
-		removeLoading: function () {
-      this.$loading && this.$loading.remove();
+		removeLoading: function (callback) {
+			this.$loading && this.$loading.remove();
+
 			this.$loading = null;
 			this.isLoading = false;
+
+			if (callback) callback.call();
 		},
 
 		loading: function (callback) {
@@ -253,12 +256,10 @@
 				this.$loading.removeClass('in');
 
 				var that = this;
-				$.support.transition && this.$element.hasClass('fade')?
-					this.$loading.one($.support.transition.end, function () { that.removeLoading() }) :
-					that.removeLoading();
 
-			} else if (callback) {
-				callback(this.isLoading);
+				$.support.transition && this.$element.hasClass('fade') ?
+					this.$loading.one($.support.transition.end, function () { that.removeLoading(callback) }) :
+					that.removeLoading(callback);
 			}
 		},
 
