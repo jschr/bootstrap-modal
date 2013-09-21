@@ -68,9 +68,11 @@
 
 					var transition = $.support.transition && modal.$element.hasClass('fade');
 
-					that.$element
-						.toggleClass('modal-open', that.hasOpenModal())
-						.toggleClass('page-overflow', $(window).height() < that.$element.height());
+					toggleOverflow(that, function() {
+						this.$element
+							.toggleClass('modal-open', this.hasOpenModal())
+							.toggleClass('page-overflow', $(window).height() < this.$element.height());
+					});
 
 					modal.$parent = modal.$element.parent();
 
@@ -138,7 +140,9 @@
 
 			var hasOpenModal = this.hasOpenModal();
 
-			this.$element.toggleClass('modal-open', hasOpenModal);
+			toggleOverflow(this, function() {
+				this.$element.toggleClass('modal-open', hasOpenModal);
+			});
 
 			if (!hasOpenModal){
 				this.$element.removeClass('page-overflow');
@@ -312,9 +316,11 @@
 		loading: function (callback) {
 			callback = callback || function () { };
 
-			this.$element
-				.toggleClass('modal-open', !this.isLoading || this.hasOpenModal())
-				.toggleClass('page-overflow', $(window).height() < this.$element.height());
+			toggleOverflow(this, function() {
+				this.$element
+					.toggleClass('modal-open', !this.isLoading || this.hasOpenModal())
+					.toggleClass('page-overflow', $(window).height() < this.$element.height());
+			});
 
 			if (!this.isLoading) {
 
@@ -396,6 +402,30 @@
 		}
 	}
 
+  // Allows to avoid visible body resizing when modal is appended
+  // Supposed to work properly only with body and if initial margin was 0
+  function toggleOverflow(elem, block) {
+    var current_margin = parseInt(elem.$element.css("marginRight"));
+
+    if (elem.$element[0].initialMargin === undefined) {
+      elem.$element[0].initialMargin = current_margin;
+    }
+
+    if (elem.$element[0].tagName == "BODY" && elem.$element[0].initialMargin === 0) {
+      var width_was = elem.$element.width();
+
+      block.call(elem);
+
+      var width_become = elem.$element.width(),
+		width_diff = width_become - width_was;
+
+      if (width_diff !== 0) {
+        elem.$element.css({ marginRight: current_margin + width_diff + "px" });
+      }
+    } else {
+      block.call(elem);
+    }
+  }
 
 	/* MODAL MANAGER PLUGIN DEFINITION
 	* ======================= */
