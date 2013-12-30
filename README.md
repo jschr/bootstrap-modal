@@ -1,4 +1,4 @@
-Bootstrap Modal v2.2.0
+Bootstrap Modal v2.2.1
 =============
 
 See live demo [here](http://jschr.github.com/bootstrap-modal/).
@@ -145,4 +145,8 @@ See the stackable example on the [demo](http://jschr.github.com/bootstrap-modal/
 	
 
 
+
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jschr/bootstrap-modal/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
