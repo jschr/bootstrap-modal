@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-modalmanager.js v2.2.0
+ * bootstrap-modalmanager.js v2.2.1
  * ===========================================================
  * Copyright 2012 Jordan Schroter.
  *
@@ -119,34 +119,30 @@
 					if (transition) { modal.$element[0].offsetWidth; }
 
 					$.support.transition && modal.$element.hasClass('fade') ?
-						modal.$backdrop.one($.support.transition.end, function () { that.destroyModal(modal) }) :
-						that.destroyModal(modal);
+						modal.$backdrop.one($.support.transition.end, function () { modal.destroy(); }) :
+						modal.destroy();
 				} else {
-					that.destroyModal(modal);
+					modal.destroy();
 				}
 
 			}));
 
 			modal.$element.on('destroy.modalmanager', targetIsSelf(function (e) {
 				that.removeModal(modal);
+				
+				var hasOpenModal = that.hasOpenModal();
+
+				that.$element.toggleClass('modal-open', hasOpenModal);
+
+				if (!hasOpenModal){
+					that.$element.removeClass('page-overflow');
+				}
+
+				that.removeContainer(modal);
+
+				that.setFocus();
 			}));
 
-		},
-
-		destroyModal: function (modal) {
-			modal.destroy();
-
-			var hasOpenModal = this.hasOpenModal();
-
-			this.$element.toggleClass('modal-open', hasOpenModal);
-
-			if (!hasOpenModal){
-				this.$element.removeClass('page-overflow');
-			}
-
-			this.removeContainer(modal);
-
-			this.setFocus();
 		},
 
 		getOpenModals: function () {
