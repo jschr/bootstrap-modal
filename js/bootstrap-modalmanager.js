@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-modalmanager.js v2.2.1
+ * bootstrap-modalmanager.js v2.2.2
  * ===========================================================
  * Copyright 2012 Jordan Schroter.
  *
@@ -110,14 +110,15 @@
 			}));
 
 			modal.$element.on('hidden.modalmanager', targetIsSelf(function (e) {
-
 				that.backdrop(modal);
-				if (modal.$backdrop){
+				// handle the case when a modal may have been removed from the dom before this callback executes
+				if (!modal.$element.parent().length) {
+					that.destroyModal(modal);
+				} else if (modal.$backdrop){
 					var transition = $.support.transition && modal.$element.hasClass('fade');
 
 					// trigger a relayout due to firebox's buggy transition end event 
 					if (transition) { modal.$element[0].offsetWidth; }
-
 					$.support.transition && modal.$element.hasClass('fade') ?
 						modal.$backdrop.one($.support.transition.end, function () { modal.destroy(); }) :
 						modal.destroy();
@@ -128,19 +129,7 @@
 			}));
 
 			modal.$element.on('destroy.modalmanager', targetIsSelf(function (e) {
-				that.removeModal(modal);
-				
-				var hasOpenModal = that.hasOpenModal();
-
-				that.$element.toggleClass('modal-open', hasOpenModal);
-
-				if (!hasOpenModal){
-					that.$element.removeClass('page-overflow');
-				}
-
-				that.removeContainer(modal);
-
-				that.setFocus();
+				that.destroyModal(modal);
 			}));
 
 		},
@@ -168,13 +157,24 @@
 			if (!topModal) return;
 
 			topModal.focus();
-
 		},
 
-		removeModal: function (modal) {
+		destroyModal: function (modal) {
 			modal.$element.off('.modalmanager');
 			if (modal.$backdrop) this.removeBackdrop(modal);
 			this.stack.splice(this.getIndexOfModal(modal), 1);
+
+			var hasOpenModal = this.hasOpenModal();
+
+			this.$element.toggleClass('modal-open', hasOpenModal);
+
+			if (!hasOpenModal){
+				this.$element.removeClass('page-overflow');
+			}
+
+			this.removeContainer(modal);
+
+			this.setFocus();
 		},
 
 		getModalAt: function (index) {
