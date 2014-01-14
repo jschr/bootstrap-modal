@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-modalmanager.js v2.2.2
+ * bootstrap-modalmanager.js v2.2.3
  * ===========================================================
  * Copyright 2012 Jordan Schroter.
  *
@@ -414,5 +414,11 @@
 	};
 
 	$.fn.modalmanager.Constructor = ModalManager
+
+	// ModalManager handles the modal-open class so we need 
+	// to remove conflicting bootstrap 3 event handlers
+	$(function () {
+		$(document).off('show.bs.modal').off('hidden.bs.modal');
+	});
 
 }(jQuery);
