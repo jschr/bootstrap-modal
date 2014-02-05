@@ -315,7 +315,8 @@
 			this.$element.removeData('modal');
 			this.$element
 				.removeClass('in')
-				.attr('aria-hidden', true);
+				.attr('aria-hidden', true)
+				.trigger('destroyed');
 		}
 	};
 
