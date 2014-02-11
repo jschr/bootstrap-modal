@@ -298,57 +298,64 @@
 			this.isLoading = false;
 		},
 
-		removeLoading: function () {
-			this.$backdropHandle && this.$backdropHandle.remove();
-			this.$backdropHandle = null;
-			this.removeSpinner();
-		},
-
-		loading: function (callback) {
+		createLoading: function (callback) {
 			callback = callback || function () { };
 
 			this.$element
-				.toggleClass('modal-open', !this.isLoading || this.hasOpenModal())
+				.toggleClass('modal-open', this.hasOpenModal())
 				.toggleClass('page-overflow', $(window).height() < this.$element.height());
 
-			if (!this.isLoading) {
+			this.$backdropHandle = this.createBackdrop('fade');
 
-				this.$backdropHandle = this.createBackdrop('fade', this.options.backdropTemplate);
+			this.$backdropHandle[0].offsetWidth; // force reflow
 
-				this.$backdropHandle[0].offsetWidth; // force reflow
+			this.$backdropHandle
+				.css('z-index', getzIndex('backdrop', this.stack.length))
+				.addClass('in');
 
-				var openModals = this.getOpenModals();
+			var $spinner = $(this.options.spinner)
+				.css('z-index', getzIndex('modal', this.stack.length))
+				.appendTo(this.$element)
+				.addClass('in');
 
-				this.$backdropHandle
-					.css('z-index', getzIndex('backdrop', openModals.length + 1))
-					.addClass('in');
+			this.$spinner = $(this.createContainer())
+				.append($spinner)
+				.on('click.modalmanager', $.proxy(this.loading, this));
 
-				var $spinner = $(this.options.spinner)
-					.css('z-index', getzIndex('modal', openModals.length + 1))
-					.appendTo(this.$element)
-					.addClass('in');
+			this.isLoading = true;
 
-				this.$spinner = $(this.createContainer())
-					.append($spinner)
-					.on('click.modalmanager', $.proxy(this.loading, this));
+			$.support.transition ?
+				this.$backdropHandle.one($.support.transition.end, callback) :
+				callback();
+		},
 
-				this.isLoading = true;
+		removeLoading: function () {
+			this.$element
+				.removeClass('modal-open')
+				.toggleClass('page-overflow', $(window).height() < this.$element.height());
 
-				$.support.transition ?
-					this.$backdropHandle.one($.support.transition.end, callback) :
-					callback();
-
-			} else if (this.isLoading && this.$backdropHandle) {
+			if (this.$backdropHandle)
 				this.$backdropHandle.removeClass('in');
 
-				var that = this;
-				$.support.transition ?
-					this.$backdropHandle.one($.support.transition.end, function () { that.removeLoading() }) :
-					that.removeLoading();
-
-			} else if (callback) {
-				callback(this.isLoading);
+			function remove() {
+				this.$backdropHandle && this.$backdropHandle.remove();
+				this.$backdropHandle = null;
+				this.removeSpinner();
 			}
+			$.support.transition && this.$backdropHandle ?
+				this.$backdropHandle.one($.support.transition.end, function () { remove.call(this); }) :
+				remove.call(this);
+		},
+
+		loading: function (callback) {
+			callback = callback || function () {};
+
+			if (!this.isLoading)
+				this.createLoading(callback);
+			else if (this.isLoading && this.$backdropHandle)
+				this.removeLoading(callback);
+			else if (callback)
+				callback(this.isLoading);
 		}
 	};
 
