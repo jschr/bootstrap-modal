@@ -342,9 +342,10 @@
 				this.$backdropHandle = null;
 				this.removeSpinner();
 			}
+			var that = this;
 			$.support.transition && this.$backdropHandle ?
-				this.$backdropHandle.one($.support.transition.end, function () { remove.call(this); }) :
-				remove.call(this);
+				this.$backdropHandle.one($.support.transition.end, function () { remove.call(that); }) :
+				remove.call(that);
 		},
 
 		loading: function (callback) {
