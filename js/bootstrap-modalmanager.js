@@ -363,8 +363,8 @@
 		return function (type, pos) {
 
 			if (typeof zIndexFactor === 'undefined'){
-				var $baseModal = $('<div class="modal hide" />').appendTo('body'),
-					$baseBackdrop = $('<div class="modal-backdrop hide" />').appendTo('body');
+				var $baseModal = $('<div class="modal hide" />').appendTo($.fn.modal.defaults.manager),
+					$baseBackdrop = $('<div class="modal-backdrop hide" />').appendTo($.fn.modal.defaults.manager);
 
 				baseIndex['modal'] = +$baseModal.css('z-index');
 				baseIndex['backdrop'] = +$baseBackdrop.css('z-index');
