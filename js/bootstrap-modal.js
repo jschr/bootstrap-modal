@@ -293,7 +293,7 @@
 
 
 		destroy: function () {
-			var e = $.Event('destroy');
+			var e = $.Event('destroyed');
 			this.$element.trigger(e);
 			if (e.isDefaultPrevented()) return;
 
