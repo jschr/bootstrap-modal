@@ -1,4 +1,4 @@
-Bootstrap Modal v2.2.3
+Bootstrap Modal v2.2.4
 =============
 
 See live demo [here](http://jschr.github.com/bootstrap-modal/).
@@ -25,6 +25,10 @@ If you're using the loading spinner functionality you may also need to change th
                 '<div class="progress-bar" style="width: 100%;"></div>' +
             '</div>' +
         '</div>';
+
+
+**Note**: Since this plugin was created to solve a lot of the issues with BS2, it still uses the BS2 markup syntax. Currently I believe the default BS3 modal addresses some of the bigger issues and is not worth maintaining two versions of this plugin.
+
 
 Overview
 -----------

@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-modalmanager.js v2.2.3
+ * bootstrap-modalmanager.js v2.2.4
  * ===========================================================
  * Copyright 2012 Jordan Schroter.
  *
@@ -128,10 +128,9 @@
 
 			}));
 
-			modal.$element.on('destroy.modalmanager', targetIsSelf(function (e) {
+			modal.$element.on('destroyed.modalmanager', targetIsSelf(function (e) {
 				that.destroyModal(modal);
 			}));
-
 		},
 
 		getOpenModals: function () {
