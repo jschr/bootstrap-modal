@@ -385,7 +385,7 @@
 	// if Boostsrap namespaced events, this would not be needed.
 	function targetIsSelf(callback){
 		return function (e) {
-			if (this === e.target){
+			if (e && this === e.target){
 				return callback.apply(this, arguments);
 			}
 		}
