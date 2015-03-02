@@ -18,6 +18,7 @@ body.modal-open,
   left: 50%;
   bottom: auto;
   right: auto;
+  z-index: 1050;
   padding: 0;
   width: 500px;
   margin-left: -250px;
@@ -32,4 +33,13 @@ body.modal-open,
 
 .modal.container {
   max-width: none;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
 }
