@@ -28,6 +28,10 @@
   .marketing p {
     font-size: 18px;
   }
+  .drag{
+    cursor: move; 
+  
+  }
   </style>
 </head>
 <body>
@@ -117,7 +121,16 @@
             </div>
           </div>
           <br />
-
+          
+          <!--draggable-->
+          <div class="stackable">
+  				  <h3>Draggable</h3>
+  				  <pre class="pre-scrollable prettyprint linenums" data-source="#dragit">         
+  				  </pre>
+  				  <div class="text-center">
+  					<button class="demo btn btn-primary btn-large" data-toggle="modal" href="#dragit">View Demo</button>
+  				  </div>
+  				</div>
 		    </div>
 	    </div>
 	  </div>
@@ -192,6 +205,8 @@
   </div>
 </div>
 
+
+
 <div id="stack2" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -250,6 +265,8 @@
   </div>
 </div>
 
+
+
 <div id="notlong" class="modal hide fade" tabindex="-1" data-replace="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -280,6 +297,28 @@
     <button type="button" data-dismiss="modal" class="btn">Close</button>
   </div>
 </div>
+
+<div id="dragit" class="modal hide fade" tabindex="-1" data-focus-on="input:first">
+  <div class="modal-header drag">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Draggable Modal</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+    <p>One fine body…</p>
+    <p>One fine body…</p>
+    <input type="text" data-tabindex="1" />
+    <input type="text" data-tabindex="2" />
+    <button class="btn" data-toggle="modal" href="#stack2">Launch modal</button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" data-dismiss="modal" class="btn">Close</button>
+    <button type="button" class="btn btn-primary">Ok</button>
+  </div>
+</div>
+
+
+
 
 <div id="ajax-modal" class="modal hide fade" tabindex="-1"></div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
@@ -338,6 +377,8 @@ $('.dynamic .demo').click(function(){
 });
 </script>
 
+
+
 <script id="ajax" type="text/javascript">
 
 var $modal = $('#ajax-modal');
@@ -366,5 +407,13 @@ $modal.on('click', '.update', function(){
 });
 
 </script> 
+
+ <script>
+$(function() {
+$( "#dragit" ).draggable();
+});
+</script>
+ <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
   </body>
 </html>
