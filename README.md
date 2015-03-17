@@ -1,7 +1,7 @@
 **Note**: Since this plugin was created to solve a lot of the issues with BS2, it still uses the BS2 markup syntax. Currently I believe the default BS3 modal addresses some of the bigger issues and is not worth maintaining two versions of this plugin.
 
 
-Bootstrap Modal v2.2.5
+Bootstrap Modal v2.2.6
 =============
 
 See live demo [here](http://jschr.github.com/bootstrap-modal/).
