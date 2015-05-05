@@ -62,10 +62,10 @@ In addition to the standard bootstrap options, you now have access to the follow
 **Modal**
 
 + **width**
-Set the inital width of the modal.
+Set the initial width of the modal.
 
 + **height**
-Set the inital height of the modal.
+Set the initial height of the modal.
 
 + **maxHeight**
 Set the max-height of the modal-body.
@@ -128,7 +128,7 @@ The reason for doing this instead of just simply setting `overflow: hidden` when
 Constrain Modal to Window Size
 -----------
 	
-You can bind the the height of the modal body to the window with something like this:
+You can bind the height of the modal body to the window with something like this:
 	
     $.fn.modal.defaults.maxHeight = function(){
         // subtract the height of the modal header and footer
