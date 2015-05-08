@@ -4,7 +4,7 @@
   "version": "2.2.5",
   "main": ["js/bootstrap-modal.js", "js/bootstrap-modalmanager.js", "css/bootstrap-modal.css"],
   "dependencies": {
-    "bootstrap": "2.3.0"
+    "bootstrap": ">=2.3.0"
   },
   "url": "https://github.com/jschr/bootstrap-modal.git",
   "author": "Jordan Schroter",
