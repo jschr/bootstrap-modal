@@ -111,6 +111,24 @@ Provide a custom image or animation for the loading spinner.
 + **backdropTemplate**
 Provide a custom modalmanager backdrop. This backdrop is used when `$element.modalmanager('loading')` is called.
 
+Getting a reference to the modal manager
+-----------
+
+If you did not created your own ModalManager, perhaps you'll need a reference to it. That can be easily accomplished using the following snippet:
+
+```javascript
+	var modalManager = $("body").data("modalmanager");
+	var openModals = modalManager.getOpenModals();
+	modalManager.removeLoading();
+```
+
+After that, you'll be able to call any methods that modal manager has, such as:
+
+* removeLoading (remove the loading and backdrop window);
+* getOpenModals (to get the modals that are already open);
+* etc;
+
+
 Disable Background Scrolling
 -----------
 
