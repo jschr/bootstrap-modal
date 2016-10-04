@@ -163,6 +163,8 @@
 			if (modal.$backdrop) this.removeBackdrop(modal);
 			this.stack.splice(this.getIndexOfModal(modal), 1);
 
+			modal.destroy();
+
 			var hasOpenModal = this.hasOpenModal();
 
 			this.$element.toggleClass('modal-open', hasOpenModal);
