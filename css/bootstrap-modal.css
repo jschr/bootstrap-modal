@@ -10,7 +10,12 @@
 .modal-open {
 	overflow: hidden;
 }
-
+.modal-open body {
+    overflow-y:scroll;
+}
+.modal-open .navbar-fixed-top, .modal-open .navbar-fixed-bottom {
+    left: -17px;
+}
 
 /* add a scroll bar to stop page from jerking around */
 .modal-open.page-overflow .page-container,

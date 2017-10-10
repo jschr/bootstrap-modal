@@ -67,10 +67,9 @@
 					modal.isShown = true;
 
 					var transition = $.support.transition && modal.$element.hasClass('fade');
-
-					that.$element
-						.toggleClass('modal-open', that.hasOpenModal())
-						.toggleClass('page-overflow', $(window).height() < that.$element.height());
+					
+					$('html').toggleClass('modal-open', that.hasOpenModal());
+					that.$element.toggleClass('page-overflow', $(window).height() < that.$element.height());
 
 					modal.$parent = modal.$element.parent();
 
@@ -165,7 +164,7 @@
 
 			var hasOpenModal = this.hasOpenModal();
 
-			this.$element.toggleClass('modal-open', hasOpenModal);
+			$('html').toggleClass('modal-open', hasOpenModal);
 
 			if (!hasOpenModal){
 				this.$element.removeClass('page-overflow');
@@ -307,9 +306,8 @@
 		loading: function (callback) {
 			callback = callback || function () { };
 
-			this.$element
-				.toggleClass('modal-open', !this.isLoading || this.hasOpenModal())
-				.toggleClass('page-overflow', $(window).height() < this.$element.height());
+			$('html').toggleClass('modal-open', that.hasOpenModal());
+			this.$element.toggleClass('page-overflow', $(window).height() < this.$element.height());
 
 			if (!this.isLoading) {
 
