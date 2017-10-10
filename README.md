@@ -134,12 +134,12 @@ Disable Background Scrolling
 
 If you want to prevent the background page from scrolling (see [demo](http://jschr.github.com/bootstrap-modal/) for example) you must wrap the page contents in a `<div class="page-container">`. For example:
 ```html
-<body>
-   <div class="page-container">
-	  <div class="navbar navbar-fixed-top">...</div>
-	  <div class="container">...</div>
-   </div>
-</body>
+	<body>
+	   <div class="page-container">
+		  <div class="navbar navbar-fixed-top">...</div>
+		  <div class="container">...</div>
+	   </div>
+	</body>
 ```
 
 The reason for doing this instead of just simply setting `overflow: hidden` when a modal is open is to avoid having the page shift as a result of the scrollbar appearing/disappearing. This also allows the document to be scrollable when there is a tall modal but only to the height of the modal, not the entire page.
