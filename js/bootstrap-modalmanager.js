@@ -49,6 +49,19 @@
 						}
 					}, 10);
 				});
+				// listen to 'change' event, checking if modal-size changed and call 'layout'. 
+				$(document).on('change.modal','.modal.modal-reposition',function(e){
+					var $target = $(e.currentTarget)
+						, modal = $target.data('modal');
+					if (modal && modal.isShown){
+						setTimeout(
+							function(){
+								if ($target.height()!=$target.data('modalheight') || $target.width()!=$target.data('modalwidth'))
+									modal.layout()
+              }
+							,$target.data('repositionwait') || that.options.repositionWait || 300);
+					}
+				});
 			}
 		},
 
