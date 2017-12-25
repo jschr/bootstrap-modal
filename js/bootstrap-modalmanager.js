@@ -69,7 +69,7 @@
 					var transition = $.support.transition && modal.$element.hasClass('fade');
 
 					that.$element
-						.css('padding-right', window.innerWidth - document.documentElement.clientWidth)
+						.css('padding-right', parseInt(that.$element.css('padding-right'), 10) || window.innerWidth - document.documentElement.clientWidth)
 						.toggleClass('modal-open', that.hasOpenModal())
 						.toggleClass('page-overflow', $(window).height() < that.$element.height());
 
@@ -167,7 +167,7 @@
 			var hasOpenModal = this.hasOpenModal();
 
 			this.$element
-				.css('padding-right', window.innerWidth - document.documentElement.clientWidth)
+				.css('padding-right', this.hasOpenModal() ? this.$element.css('padding-right') : window.innerWidth - document.documentElement.clientWidth)
 				.toggleClass('modal-open', hasOpenModal);
 
 			if (!hasOpenModal){
