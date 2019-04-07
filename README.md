@@ -3,6 +3,8 @@
 
 Bootstrap Modal v2.2.6
 =============
+[![Backers on Open Collective](https://opencollective.com/bootstrap-modal/backers/badge.svg)](#backers)
+ [![Sponsors on Open Collective](https://opencollective.com/bootstrap-modal/sponsors/badge.svg)](#sponsors) 
 
 See live demo [here](http://jschr.github.com/bootstrap-modal/).
 
@@ -174,3 +176,33 @@ See the stackable example on the [demo](http://jschr.github.com/bootstrap-modal/
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/jschr/bootstrap-modal/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
+## Contributors
+
+This project exists thanks to all the people who contribute. 
+<a href="https://github.com/jschr/bootstrap-modal/graphs/contributors"><img src="https://opencollective.com/bootstrap-modal/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/bootstrap-modal#backer)]
+
+<a href="https://opencollective.com/bootstrap-modal#backers" target="_blank"><img src="https://opencollective.com/bootstrap-modal/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/bootstrap-modal#sponsor)]
+
+<a href="https://opencollective.com/bootstrap-modal/sponsor/0/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/1/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/2/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/3/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/4/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/5/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/6/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/7/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/8/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/bootstrap-modal/sponsor/9/website" target="_blank"><img src="https://opencollective.com/bootstrap-modal/sponsor/9/avatar.svg"></a>
+
+
